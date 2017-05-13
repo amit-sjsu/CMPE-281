@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accomodation</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/accomodation.css" rel="stylesheet" type="text/css">
+    <!--<script src="js/accomodation.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/6.6.2/sweetalert2.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/sweetalert2/6.6.2/sweetalert2.min.js"></script>
+
+</head>
+
+<body style="color: black" ng-app = "myApp" ng-controller="AccomoController">
+<div class="container-fluid">
+
+
+    <div class="row loginrow">
+        <div class="container">
+
+            <div class="col-md-3 col-xs-6 logo">
+                <img src="img/sparta-scoop.png" style="width: 150px;">
+            </div>
+
+            <div class="col-xs-6 text-right phonenv">
+                <div class="col-xs-4 col-xs-offset-5 prp">
+                    <img src="img/guy2.svg">
+                </div>
+                <div class="col-xs-2 menu">
+                    <img src="img/arrow.svg">
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <!--phonenav-->
+    <div class="row phnav text-center">
+        <ul>
+            <li><p>{{username}</p></li>
+            <li><a ng-click="SpartaJob()">TIMELINE</a></li>
+            <li><a ng-click="profile()">EDIT PROFILE</a></li>
+            <li><a ng-click="SpartaJob()">ON CAMPUS JOBS</a></li>
+            <li><a class="active"  ng-click="accomodation()">ACCOMODATION</a></li>
+            <li><a ng-click="SpartaEvents()">EVENTS</a></li>
+            <li><a ng-click="logout()">LOG OUT</a></li>
+
+        </ul>
+    </div>
+    <!--phonenavend-->
+
+
+    <!--sidebar-->
+    <div class="sideouter">
+        <div class="col-md-2 mar40 sidebar">
+            <div class="row text-center">
+                <img class="rounder" id="profileImage"  src=""  alt="user profile">
+            </div>
+
+            <div class="row text-center mar20">
+                <p class="dname">{{username}}</p>
+            </div>
+
+            <div class="row text-center nvv">
+                <ul>
+                    <li><a ng-click="SpartaJob()">TIMELINE</a></li>
+                    <li><a ng-click="profile()">EDIT PROFILE</a></li>
+                    <li><a ng-click="SpartaJob()">ON CAMPUS JOBS</a></li>
+                    <li><a class="active"  ng-click="accomodation()">ACCOMODATION</a></li>
+                    <li><a ng-click="SpartaEvents()">EVENTS</a></li>
+                    <li><a ng-click="logout()">LOG OUT</a></li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--sidebar end-->
+
+
+    <!--newsfeed-->
+    <div class="col-md-9 marleft2 mar40 newclass">
+
+        <div class="row">
+            <div class="col-md-9" id="map"></div>
+
+            <div class="col-md-2">
+                <form>
+                    <label class="col-form-label">Post a new Vacancy...</label>
+
+                    <div class="row form-group">
+                        <input class="form-control" type="text"  ng-model="apartment" placeholder = "Apartment Title..." id="tit" required>
+                    </div>
+
+                    <div class="row form-group">
+                        <select class="form-control" ng-model="type" id="type">
+                            <option>Temporary</option>
+                            <option>Permanent</option>
+                            <option>Cafeteria</option>
+                            <option>Adminstration</option>
+                        </select>
+                    </div>
+
+                    <div class="row form-group" id="add">
+                        <input class="form-control" id="inp" ng-model="address" type="text" onfocus="showPlaces(this.id)" placeholder = "Address..." required>
+                    </div>
+
+                    <div class="row form-group">
+                        <input class="form-control" type="text" ng-model="preference" id="prefer" placeholder = "Preference..." required>
+                    </div>
+
+                    <div class="row form-group">
+                        <input class="form-control" type="text" id="date" ng-model="startdate" placeholder = "Start Date..." required>
+                    </div>
+
+                    <div class="row form-group">
+                        <input class="form-control" type="text" id="fac" ng-model="facilities" placeholder = "Facilities..." required>
+                    </div>
+
+                    <div class="row form-group">
+                        <input class="form-control" type="text" id="vacan" ng-model="vacancies" placeholder = "Vacancies..." required>
+                    </div>
+
+                    <div class="row form-group">
+                        <input class="form-control" type="text" id="con" ng-model="contact" placeholder = "Contact..." required>
+                    </div>
+
+                    <div class="row form-group">
+                        <input class="form-control" type="text" id="rent"  ng-model="rent" placeholder = "Rent..." required>
+                    </div>
+
+                    <div class="form-group row">
+                        <button type="submit" class="col-sm-5 btn btn-primary" ng-click="accomodationPost()">Submit</button>
+                        <label class="col-sm-1 col-form-label"></label>
+
+                        <button type="cancel" class=" col-sm-4 btn btn-danger">Reset</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--newsfeed-->
+</div>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDcPwALh103uGlDrdPVD2xcKmA7BY5Weo&callback=initMap&libraries=places">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+
+<script src="angular/accomodation.js"></script>
+<script src="angular/search.js"></script>
+<!--<script src="js/accomodation.js"></script>-->
+<script>
+
+    if(sessionStorage.getItem("imageSrc")!=null)
+        document.getElementById("profileImage").src=sessionStorage.getItem("imageSrc");
+    else
+        document.getElementById("profileImage").src="img/guy1.svg";
+
+
+
+
+    $(document).ready(function(){
+        $('.menu').click(function(){
+            $('.phnav').slideToggle();
+        })
+
+    })
+</script>
+
+</body>
+</html>

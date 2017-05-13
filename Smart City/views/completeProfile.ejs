@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="description" content="find jobs in sjsu">
+    <meta name="keywords" content="jobs,accomodations,events,free food and stuff, ">
+    <meta name="author" content="spark">
+    <title>Edit Profile</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-98696696-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+<body  ng-controller="AppCtrl">
+
+<div class="container-fluid">
+    <div class="row loginrow">
+        <div class="container">
+
+            <div class="col-md-3 col-xs-6 logo">
+                <img src="img/sparta-scoop.png">
+            </div>
+
+            <div class="col-xs-6 text-right phonenv">
+                <div class="col-xs-4 col-xs-offset-5 prp">
+                    <img src="img/guy2.svg">
+                </div>
+                <div class="col-xs-2 menu">
+                    <img src="img/arrow.svg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--phonenav-->
+    <div class="row phnav text-center">
+        <ul>
+            <li><a href="#">TIMELINE</a></li>
+            <li><a href="profile.html"  class="active">EDIT PROFILE</a></li>
+            <li><a href="#">ON CAMPUS JOBS</a></li>
+            <li><a href="marketplace.html">MARKET PLACE</a></li>
+            <li><a href="#">LOG OUT</a></li>
+        </ul>
+    </div>
+    <!--phonenavend-->
+
+
+
+    <div class="container mar40 rounder profile">
+
+
+
+        <div class="row text-center">
+            <div class="col-md-5"></div>
+
+            <div class="col-md-2 rounder image-upload">
+                <label for="file-input">
+                    <img class="rounder" id="defaultValue" src=""/>
+                </label>
+
+                <input id="file-input" type="file" onchange="encodeImageFileAsURL(this)"/>
+            </div>
+        </div>
+
+        <div class="row mar20">
+            <strong>
+                <h2>Upload Photo</h2>
+            </strong>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4 mar40 formm">
+            <form>
+
+                <div class="row form-group">
+                    <input  class="form-control no-border" type="text" ng-model="degree" id="degree" placeholder = "Degree..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" type="text" ng-model="major" id="major" placeholder = "Major..." required>
+                </div>
+
+                <div class="form-group row buttons">
+                    <button type="submit" class="col-sm-5 btn btn-primary" ng-click="completeProfile()" >Submit</button>
+                    <label class="col-sm-2 col-form-label"></label>
+
+                    <button type="reset"  ng-click="SkipProfile()" class=" col-sm-5 btn btn-danger">Skip</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/profile.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script src="angular/indexController.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.menu').click(function(){
+            $('.phnav').slideToggle();
+        })
+
+    })
+
+</script>
+<script>
+
+    sessionStorage.setItem("imageSrc","img/guy1.svg");
+    document.getElementById('defaultValue').src=sessionStorage.getItem('imageSrc');
+
+
+    function encodeImageFileAsURL(element) {
+        var file = element.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            console.log('RESULT', reader.result)
+            sessionStorage.setItem("imageSrc",reader.result);
+            document.getElementById('defaultValue').src=sessionStorage.getItem('imageSrc');
+        }
+        reader.readAsDataURL(file);
+
+
+    }
+
+
+
+</script>
+</body>
+</html>

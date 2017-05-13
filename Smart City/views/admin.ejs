@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="description" content="find jobs in sjsu">
+    <meta name="keywords" content="jobs,accomodations,events,free food and stuff, ">
+    <meta name="author" content="spark">
+    <title>PortalB</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/feed.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/admin.css" rel="stylesheet" type="text/css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="icon" href="img/spartans.png">
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-98696696-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+</head>
+
+<body ng-app="myApp" ng-controller="AdminCtrl">
+<div class="container-fluid" style="padding-left: 0px;">
+
+    <div class="row loginrow">
+        <div class="container">
+
+            <div class="col-md-3 col-xs-6 logo">
+                <img src="img/sparta-scoop.png">
+            </div>
+
+            <div class="col-xs-6 text-right phonenv">
+                <div class="col-xs-4 col-xs-offset-5 prp">
+                    <img src="img/guy2.svg">
+                </div>
+                <div class="col-xs-2  menu">
+                    <img src="img/arrow.svg">
+                </div>
+            </div>
+
+            <!--<div class="col-md-9 text-right ">-->
+                <!--&lt;!&ndash;<i class="fa fa-2x fa-bell" aria-hidden="true" "></i><a href="#" style="margin-right:20px;"><span class="badge">42</span></a>&ndash;&gt;-->
+                <!--<div class="btn-group">-->
+                    <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                        <!--<i class="fa fa-2x fa-user profile" aria-hidden="true"></i> <span class="caret"></span>-->
+                    <!--</button>-->
+                    <!--<ul class="dropdown-menu">-->
+                        <!--&lt;!&ndash;<li><a href="#">Profile</a></li>&ndash;&gt;-->
+                        <!--<li><a href="#">Settings</a></li>-->
+                        <!--<li><a href="#">privacy</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <!--<li><a ng-click="logout()">Logout</a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+
+            <!--</div>-->
+
+
+        </div>
+    </div>
+
+
+    <!--phonenavstart-->
+
+
+    <div class="row phnav text-center">
+        <ul>
+            <li><p>Admin</p></li>
+            <li><a ng-click="profile()">SETTING</a></li>
+            <li><a  ng-click="logout()">LOG OUT</a></li>
+            <li><a  id="adminGraph1" onclick="displayUserAnalysis()" >Analysis</a></li>
+            <li><a  id="adminGraph2" onclick="displayUsersOnline()">Online Users</a></li>
+            <li><a  id="adminGraph3" onclick="displayPostsMonthly()">Monthly Posts</a></li>
+        </ul>
+    </div>
+    <!--phonenavend-->
+
+
+    <!--sidebar-->
+    <div class="sideouter">
+        <div class="col-md-2 mar40 sidebar">
+            <div class="row text-center">
+                <img class="rounder" id="profileImage"  src="img/guy2.svg"  alt="user profile">
+            </div>
+
+            <div class="row text-center mar20">
+                <p class="dname">Admin</p>
+            </div>
+
+            <div class="row text-center nvv">
+                <ul>
+                    <li><a class="active"  id="adminGraph1" onclick="displayUserAnalysis()" >Analysis</a></li>
+                    <li><a  id="adminGraph2" onclick="displayUsersOnline()">Online Users</a></li>
+                    <li><a  id="adminGraph3" onclick="displayPostsMonthly()">Monthly Posts</a></li>
+                    <li><a ng-click="logout()">LOG OUT</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!---->
+    <!---->
+    <!--&lt;!&ndash;phonenav&ndash;&gt;-->
+    <!--<div class="row phnav text-center">-->
+        <!--<ul>-->
+            <!--<li><p>Admin</p></li>-->
+            <!--<li><a href="#" class="active">Users Online</a></li>-->
+            <!--<li><a href="profile.html">Posts</a></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;phonenavend&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;sidebar&ndash;&gt;-->
+    <!--<div class="sideouter">-->
+        <!--<div class="col-md-1 mar40 sidebar">-->
+            <!--<div class="row text-center">-->
+                <!--<img src="img/guy2.svg" style="border-radius: 50%;">-->
+            <!--</div>-->
+
+            <!--<div class="row text-center mar20">-->
+                <!--<p class="dname">Admin</p>-->
+            <!--</div>-->
+            <!--<br><br>-->
+            <!--<div class="row text-center nvv">-->
+                <!--<ul>-->
+                    <!--<li>-->
+                        <!--<div  id="adminGraph1" onclick="displayUserAnalysis()" class="Anchor active" style=" text-decoration: none;">-->
+                            <!--<i class="fa fa-4x  fa-tachometer " ></i>-->
+                            <!--<br>Dashboard</span>-->
+                        <!--</div>-->
+                    <!--</li><br>-->
+                    <!--<li>-->
+                        <!--<div   id="adminGraph2" onclick="displayUsersOnline()" class="Anchor" style=" text-decoration: none;">-->
+                            <!--<i class="fa fa-4x  fa-users " ></i>-->
+                            <!--<br> Users Online</span>-->
+                        <!--</div>-->
+                    <!--</li><br>-->
+                    <!--<li>-->
+                        <!--<div   id="adminGraph3" onclick="displayPostsMonthly()" class="Anchor" style=" text-decoration: none;">-->
+                            <!--<i class="fa fa-4x fa-bar-chart"></i>-->
+                            <!--<br>Posts Analysis</span>-->
+                            <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--sidebar end-->
+
+
+    <!--newsfeed-->
+    <div class="col-md-8 marleft2 marright2 mar50 newclass">
+        <div id="containerAnalysis">
+            <div class="row">
+                <div class="col-sm-6" style="border:1px solid black">
+                    <div id="containerSemiCircle" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                </div>
+                <div class="col-sm-6" style="border:1px solid black">
+                    <div id="containerPieChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                </div>
+            </div>
+            <br>
+            <!--<div class="row" style="border:1px solid black">-->
+
+                <!--&lt;!&ndash;<div id="containerCombination" style="min-width: 310px; height: 400px; margin: 0 auto"></div>&ndash;&gt;-->
+
+            <!--</div>-->
+
+        </div>
+        <div id="containerOnline" style="min-width: 310px; height: 400px; margin: 0 auto;display: none"></div>
+        <div id="containerPost" style="min-width: 310px; height: 400px; margin: 0 auto;display: none"></div>
+
+    </div>
+</div>
+
+
+
+<!--footer-->
+
+
+
+<footer style="margin-top: 20px; bottom: 0px;">
+    <div class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> Get To Know Us</h3>
+                    <ul>
+                        <li> <a href="#"> Careers </a> </li>
+                        <li> <a href="#"> About Sparta-Scoop </a> </li>
+                        <li> <a href="#"> Investor Relation </a> </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> Information for </h3>
+                    <ul>
+                        <li> <a href="#">Alumni </a></li>
+                        <li> <a href="#">Current Students </a></li>
+                        <li> <a href="#">Donors </a></li>
+                        <li> <a href="#">Faculty and Staff </a></li>
+                        <li> <a href="#"> Researchers </a></li>
+
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> Let Us Help You </h3>
+                    <ul>
+                        <li> <a href="#"> Your Account </a> </li>
+                        <li> <a href="#"> Help </a> </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> Policies </h3>
+                    <ul>
+                        <li> <a href="#"> Privacy Policy </a> </li>
+                        <li> <a href="#"> Community Guidelines </a> </li>
+                        <li> <a href="#"> Cookie Policy </a> </li>
+                        <li> <a href="#"> Copyright Policy </a> </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+                    <h3 style="border:none;"> <div id="google_translate_element" class="languageDisplay"></div></h3>
+                    <ul>
+                        <li>
+                            <div class="input-append newsletter-box text-center">
+                                <input type="text" class="full text-center" placeholder="Email " style="color: black;">
+                                <button class="btn  bg-gray" type="button"> Contact Us <i class="fa fa-long-arrow-right"> </i> </button>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="social">
+                        <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-pinterest">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-youtube">   </i> </a> </li>
+                    </ul>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+        <!--/.container-->
+    </div>
+    <!--/.footer-->
+
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="text-center"> Copyright © CMPE 280 Final Project. All right reserved. </p>
+        </div>
+    </div>
+    <!--/.footer-bottom-->
+</footer>
+
+<!--footer-->
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src=js/adminCharts.js></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script src="angular/AdminController.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.menu').click(function(){
+            $('.phnav').slideToggle();
+        })
+
+    })
+</script>
+</body>
+</html>

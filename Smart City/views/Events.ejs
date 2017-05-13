@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="find jobs in sjsu">
+    <meta name="keywords" content="jobs,accomodations,events,free food and stuff, ">
+    <meta name="author" content="spark">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Events</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/feed.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/dragDrop.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="img/spartans.png">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/6.6.2/sweetalert2.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/sweetalert2/6.6.2/sweetalert2.min.js"></script>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-98696696-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+</head>
+
+<body style="color: black;background-color: #f4f6f6"  ng-app = "myApp" ng-controller="EventController">
+<div class="container-fluid">
+
+
+    <div class="row loginrow" id="headerInsert">
+        <div class="container">
+
+            <div class="col-md-3 col-xs-6 logo">
+                <img src="img/sparta-scoop.png">
+            </div>
+
+            <div class="col-xs-6 text-right phonenv">
+                <div class="col-xs-4 col-xs-offset-5 prp">
+                    <img src="img/guy2.svg">
+                </div>
+                <div class="col-xs-2  menu">
+                    <img src="img/arrow.svg">
+                </div>
+            </div>
+
+            <!--<div class="col-md-9 text-right ">-->
+            <!--&lt;!&ndash;<i class="fa fa-2x fa-bell" aria-hidden="true" "></i><a href="#" style="margin-right:20px;"><span class="badge">42</span></a>&ndash;&gt;-->
+            <!--<div class="btn-group">-->
+            <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+            <!--<i class="fa fa-2x fa-user profile" aria-hidden="true"></i> <span class="caret"></span>-->
+            <!--</button>-->
+            <!--<ul class="dropdown-menu">-->
+            <!--<li><a ng-click="profile()">Profile</a></li>-->
+            <!--<li><a href="#">Settings</a></li>-->
+            <!--<li><a href="#">privacy</a></li>-->
+            <!--<li role="separator" class="divider"></li>-->
+            <!--<li><a ng-click="logout()">Logout</a></li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+    <!--phonenav-->
+    <div class="row phnav text-center">
+        <ul>
+            <li><p>{{username}</p></li>
+            <li><a ng-click="SpartaJob()">TIMELINE</a></li>
+            <li><a ng-click="profile()">EDIT PROFILE</a></li>
+            <li><a ng-click="SpartaJob()">ON CAMPUS JOBS</a></li>
+            <li><a class="active"  ng-click="accomodation()">ACCOMODATION</a></li>
+            <li><a ng-click="SpartaEvents()">EVENTS</a></li>
+            <li><a ng-click="logout()">LOG OUT</a></li>
+
+        </ul>
+    </div>
+    <!--phonenavend-->
+
+
+    <!--sidebar-->
+    <div class="sideouter">
+        <div class="col-md-2 mar40 sidebar">
+            <div class="row text-center">
+                <img class="rounder" id="profileImage"  src=""  alt="user profile">
+            </div>
+
+            <div class="row text-center mar20">
+                <p class="dname">{{username}}</p>
+            </div>
+
+            <div class="row text-center nvv">
+                <ul>
+                    <li><a ng-click="SpartaJob()">TIMELINE</a></li>
+                    <li><a ng-click="profile()">EDIT PROFILE</a></li>
+                    <li><a ng-click="SpartaJob()">ON CAMPUS JOBS</a></li>
+                    <li><a ng-click="accomodation()">ACCOMODATION</a></li>
+                    <li><a class="active" ng-click="SpartaEvents()">Events</a></li>
+                    <li><a ng-click="logout()">LOG OUT</a></li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--sidebar end-->
+
+
+    <!--newsfeed-->
+
+    <div class="floater">
+        <div class="col-md-7 marleft2 mar50 newclass" id="feedPost">
+
+            <!--status-->
+            <div class="row">
+
+                <form action="/hms/accommodations" method="GET">
+                    <div class="input-group pull-right bar">
+                        <input type="text" class="form-control srch  no-border" id="searchValue"  onkeyup="myFunction()"  placeholder="Search for post" id="txtSearch"/>
+                        <div class="input-group-btn pull-right"></div>
+                    </div>
+                </form>
+            </div>
+
+            <!--status end-->
+
+
+            <!--feed-->
+
+
+
+
+
+            <!--<h1>AngularJS - Pagination Example with logic like Google</h1>-->
+
+            <!-- items being paged -->
+            <!--<div ng-repeat="item in dummyItems">Item {{item}}</div>-->
+
+            <div class="row mar30 feedSearch" id="postFeedDisplay" ng-repeat="countProfile in items">
+
+                <div id="1" class="col-md-11 feed">
+                    <div  id="2" class="row">
+                        <div  id="3" class="col-md-12 pp">
+                            <img  id="4" class="img-responsive " ng-src={{countProfile.postedbydetails.user_profilepicture_url}}>
+                            <div  id="5" >
+                                <p id="username" class="username" style="width: 30%;float: left">{{countProfile.postedbydetails.username}}</p>
+                                <p id="dateposted" class="dateposted" style="width: 30%;float: right;"></p></div>
+                        </div>
+                    </div>
+
+
+                    <div  id="6" class="row feed1">
+                        <div   id="7" class="col-sm-12">
+                            <p id="type" class="type">Event Title: &nbsp;&nbsp;{{countProfile.title}}</p>
+                            <p id="rate" class="rate">Website : &nbsp;&nbsp;{{countProfile.website}}</p>
+                            <p id="rate" class="rate">Entry Fees : &nbsp;&nbsp;{{countProfile.entryfees}}</p>
+                            <p id="location" class="location">Location : &nbsp;&nbsp;{{countProfile.location}}</p>
+                            <p id="description" class="description">Description: &nbsp;&nbsp;</p>
+
+                            <p class="description">
+                                {{countProfile.description}}
+                            </p>
+
+
+                            <p id="email" class="email"></p>
+                            <p id="postedon" class="postedon"></p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-12 mar20 nopad">
+                    <a href="#" class="btn3" id="like">LIKE</a> <a href="#" class="btn3" id="share">SHARE</a>
+                </div>
+
+            </div>
+
+
+
+
+            <div>
+                <div  class="container">
+                    <div class="text-center">
+
+                        <!-- pager -->
+                        <ul ng-if="pager.pages.length" class="pagination">
+                            <li ng-class="{disabled:pager.currentPage === 1}">
+                                <a ng-click="setPage(1)">First</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === 1}">
+                                <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+                            </li>
+                            <li ng-repeat="page in pager.pages" ng-class="{pager.currentPage === page}">
+                                <a ng-click="setPage(page)">{{page}}</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                <a ng-click="setPage(pager.totalPages)">Last</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr />
+                <!--<div class="credits text-center">-->
+                <!--<p>-->
+                <!--<a href="http://jasonwatmore.com/post/2016/01/31/AngularJS-Pagination-Example-with-Logic-like-Google.aspx" target="_top">AngularJS - Pagination Example with logic like Google</a>-->
+                <!--</p>-->
+                <!--<p>-->
+                <!--<a href="http://jasonwatmore.com" target="_top">JasonWatmore.com</a>-->
+                <!--</p>-->
+                <!--</div>-->
+            </div>
+
+            <!--<div class="row mar30 feedSearch" id="postFeedDisplay" ng-repeat="countProfile in post">-->
+
+            <!--<div id="1" class="col-md-11 feed">-->
+            <!--<div  id="2" class="row">-->
+            <!--<div  id="3" class="col-md-12 pp">-->
+            <!--<img  id="4" class="img-responsive " ng-src={{countProfile.postedbydetails.user_profilepicture_url}}>-->
+            <!--<div  id="5" ><p id="username" style="width: 30%;float: left">{{countProfile.postedbydetails.username}}</p>-->
+            <!--<p id="dateposted" style="width: 30%;float: right;">{{countProfile.dateposted}}</p></div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div  id="6" class="row feed1">-->
+            <!--<div   id="7" class="col-sm-12">-->
+            <!--<p id="type">{{countProfile.type}}</p>-->
+            <!--<p id="description">{{countProfile.description}}</p>-->
+            <!--<p id="location">{{countProfile.location}}</p>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+
+
+            <!--<div class="col-md-12 mar20 nopad">-->
+            <!--<a href="#" class="btn3" id="like">LIKE</a> <a href="#" class="btn3" id="share">SHARE</a>-->
+            <!--</div>-->
+
+            <!--</div>-->
+
+            <div class="row mar30" id="postFeedDisplay">
+                <div class="col-md-11">
+                </div>
+            </div>
+        </div>
+
+
+        <!--newsfeed-->
+
+        <div class="col-md-2 mar40 formm">
+            <form>
+                <label class="col-form-label textt">Post a new Event...</label>
+                <div class="row form-group">
+                    <input class="form-control no-border" type="text" ng-model="title" id="tit" placeholder = "Event Title..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="desc" type="text" ng-model="description" placeholder = "Event Description..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="loc" type="text" ng-model="location" placeholder = "Event Location..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="url" type="text" ng-model="url" placeholder = "Event URL..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="posted" type="text" ng-model="entryfees" placeholder = "Event Fees..." required>
+                </div>
+
+                <div class="form-group row buttons">
+                    <button type="button" class="col-sm-5 btn btn-primary" ng-click="EventPost()">Submit</button>
+                    <label class="col-sm-2 col-form-label"></label>
+
+                    <button type="reset" class=" col-sm-5 btn btn-danger">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/feed.js"></script>
+<script src="js/config.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script src="angular/EventController.js"></script>
+<script src="angular/search.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.menu').click(function(){
+            $('.phnav').slideToggle();
+        })
+
+    })
+</script>
+<script>
+
+
+    if(sessionStorage.getItem("imageSrc")!=null)
+        document.getElementById("profileImage").src=sessionStorage.getItem("imageSrc");
+    else
+        document.getElementById("profileImage").src="img/guy1.svg";
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
