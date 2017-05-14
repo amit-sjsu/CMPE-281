@@ -8,33 +8,24 @@ var logger = new (winston.Logger)({
 	]
 });
 
+
 exports.redirectToHome = function(req,res) {
     res.render('login');
 };
 
-exports.redirectToDashboard= function(req,res) {
+exports.redirectToSignup = function(req,res) {
+    res.render('Signup');
+};
+
+exports.redirectToConnectCluster = function(req,res) {
+    res.render('ConnectCluster');
+};
+
+exports.redirectToClientDashboard = function(req,res) {
+    res.render('ClientIndex');
+};
+
+
+exports.redirectToAdminDashboard = function(req,res) {
     res.render('index');
 };
-
-exports.redirectToUserProfile = function(req,res) {
-    res.render('feed');
-};
-
-exports.redirectToAdminProfile = function(req,res) {
-    res.render('admin');
-};
-
-exports.redirectToProfileCompletion = function(req,res) {
-    res.render('completeProfile');
-};
-exports.redirectToforgotPassword=function(req,res){
-    res.render('forgotpassword');
-}
-
-exports.redirectToEvents=function(req,res){
-    res.render('Events');
-}
-exports.redirectToAccomodation=function(req,res){
-    res.render('accomodation');
-}
-

@@ -2,31 +2,39 @@
  * Module dependencies.
 **/
 
-var express = require('express')
-  , routes = require('./routes')
-  , http = require('http')
-  , path = require('path')
-  , session = require('client-sessions')
+var express = require('express'),
+    routes = require('./routes'),
+    http = require('http'),
+    path = require('path'),
+    session = require('client-sessions');
+
 
 var AWS = require('aws-sdk');
 AWS.config.loadFromPath('./config.json');
 
-var home = require('./routes/home')
 var mongoose = require('mongoose');
-var userSchema = require('./routes/User.js');
-var jobSchema = require('./routes/Job.js');
-var eventSchema = require('./routes/Event.js');
-var accomodationSchema = require('./routes/Accomodation.js');
-var User = mongoose.model('User',userSchema);
-var Job = mongoose.model('Job', jobSchema);
-var Event = mongoose.model('Event', eventSchema);
-var Accomodation = mongoose.model('Accomodation', accomodationSchema);
 var bodyParser = require('body-parser');
+
+// connect to the db
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://admin:abc123@ds139781.mlab.com:39781/crimedb');
+
+console.log('[community api] community db : connected');
+
+var home = require('./routes/home');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var userSchema = require('./routes/user.js');
+var User = mongoose.model('user', userSchema);
+var communitySchema = require('./routes/User.js');
+var Community = mongoose.model('Community', communitySchema);
+var crimeSchema = require('./routes/User.js');
+var Crime = mongoose.model('Crime', crimeSchema);
+var serviceSchema = require('./routes/service.js');
+var Service = mongoose.model('Service', serviceSchema);
 var jsonParser = bodyParser.json();
 var app = express();
 
-mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://root:root@ds131041.mlab.com:31041/spartascoop')
 
 
 
@@ -59,15 +67,12 @@ if ('development' == app.get('env')) {
 
 
 app.get('/', home.redirectToHome);
-app.get('/login', home.redirectToDashboard);
-app.get('/profilefeed', home.redirectToUserProfile);
-app.get('/SpartaEvents', home.redirectToEvents);
-app.get('/AdminDashboard', home.redirectToAdminProfile);
-app.get('/forgotPassword', home.redirectToforgotPassword);
-app.get('/profileCompletion', home.redirectToProfileCompletion);
-app.get('/accomodation', home.redirectToAccomodation);
-
-
+/********************* Amit's update required ****************************/
+app.get('/login', home.redirectToClientDashboard);
+app.get('/signup', home.redirectToSignup);
+app.get('/connectCluster', home.redirectToConnectCluster);
+app.get('/ClientDashboard', home.redirectToClientDashboard);
+app.get('/AdminDashboard', home.redirectToAdminDashboard);
 
 // EC2 instance creation
 //
@@ -112,205 +117,267 @@ app.get('/accomodation', home.redirectToAccomodation);
 
 
 
-
-
-app.post('/v1/users/login', function(req, res){
-    console.log('[api] authenticating - ' + req.body.user_emailid);
-    console.log('[api] authenticating - ' + req.body.password);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    console.log('[api] ' + req.body);
-
-    if(req.body.user_emailid==="gaurav.misra@sjsu.edu")
-        return res.status(200).send('{"message":"Login successful","userType":"admin"}');
-
-    User.find({user_emailid:req.body.user_emailid}, function(error, user){
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
 
 
 
-        if(error){
-            res.status(404).send('{ "message" : "User not found"}');
+
+//*******************Community controller starts here*********************
+
+
+// Community API v1.0.0
+
+// get all Community available
+app.get('/v1/communities', function(req, res){
+    Community.find({}, function(error, community){
+        if(error) res.status(500).send('{ "message" : "Unable to fetch community"}');
+        res.status(200).json(community.reverse());
+    });
+});
+
+// get a particular Community
+app.get('/v1/communities/:communityid', function(req, res){
+
+    Community.find( { _id:req.params.communityid }, function(error, community){
+        if(error) res.status(500).send('{ "message" : "Unable to fetch community"}');
+        else if(community.length == 0){
+            res.status(404).send('{ "message" : "Community not found"}');
         }
-        else if(user.length === 0 )
-        {
-            res.status(404).send('{ "message" : "User not found"}');
+        else
+            res.status(200).json(community[0]);
+    });
+});
+
+// save a new Community
+app.post('/v1/communities', jsonParser, function(req, res){
+    console.log(req.body);
+    console.log(req);
+    var community = Community(req.body);
+    // console.log(crime);
+    community.save(function(er){
+        if(er){
+            console.log(er);
+            res.status(500).send('{ "message" : "Unable to save community"}');
+        }
+        else res.status(200).json(Community(req.body));
+    });
+});
+
+// delete a Community
+app.delete('/v1/communities/:communityid', function(req, res){
+    Community.find({_id:req.params.communityid}, function(err, community){
+        // console.log(job);
+        if(err) {
+            res.status(500).send('{ "message" : "Unable to delete Community"}');
+        }
+        else if(community.length == 0){
+            res.status(404).send('{ "message" : "Community not found"}');
         }
         else{
-            var temp = JSON.parse(JSON.stringify(user));
-
-            console.log(temp);
-
-            var in_pwd = req.body.password;
-            var usr_pwd = temp[0]['user_password'];
-
-            // compare the passwords
-            if(in_pwd !== usr_pwd)
-            {
-                console.log('[api] login fail');
-                return res.status(404).send('{"message":"Login failed"}');
+            try{
+                Community.findOneAndRemove({_id:req.params.communityid}, function(error){
+                    if(error) return res.status(500).send('{ "status" : "Unable to delete community" }');
+                    else{
+                        res.status(200).send('{ "status" : "community deleted" }');
+                    }
+                });
             }
-            else
-            { console.log('[api] login success');
-            req.session.user_emailid = user.user_emailid;
-            console.log("current user email" +user.user_emailid);
-                    return res.status(200).send('{"message":"Login successful","userType":"user"}');
-
+            catch(e){
+                res.status(404).send('{ "message" : "Community not found"}');
             }
         }
     });
 });
 
-
-app.get('/v1/jobs', function(req, res){
-    Job.find({}, function(error, jobs){
-        if(error) res.status(500).send('{ "message" : "Unable to fetch jobs"}');
-        res.status(200).json(jobs.reverse());
+// update a Community
+app.put('/v1/communities/:communityid', jsonParser, function(req, res){
+    // first find the user and then update him/her
+    Community.find({_id:req.params.communityid},function(error, community){
+        if(error){res.status(404).send('{ "message" : "community not found"}');}
+        else if(community.length ==0){
+            res.status(404).send('{ "message" : "community not found"}');
+        }
+        else{
+            console.log("[api] Crime found");
+            var ncommunity = req.body;
+            Community.findOneAndUpdate({_id:req.params.communityid},ncommunity,function(e,u){
+                if(e) return res.status(500).send('{ "status" : "Failed to update community" }');
+                else{
+                    console.log("[api] community updated");
+                    res.status(200).send(ncommunity);
+                }
+            });
+        }
     });
 });
 
 
-app.post('/v1/users', function(req, res){
+//*************** Service modules *******************
 
-    User.find({user_emailid:req.body.user_emailid},function(error, user){
+
+// Service API v1.0.0
+
+// get all services available
+app.get('/v1/services', function(req, res){
+    Service.find({}, function(error, services){
+        if(error) res.status(500).send('{ "message" : "Unable to fetch services"}');
+        res.status(200).json(services.reverse());
+    });
+});
+
+// get a particular service
+app.get('/v1/services/:serviceid', function(req, res){
+
+    Service.find( { _id:req.params.serviceid }, function(error, service){
+        if(error) res.status(500).send('{ "message" : "Unable to fetch service"}');
+        else if(service.length == 0){
+            res.status(404).send('{ "message" : "Service not found"}');
+        }
+        else
+            res.status(200).json(service[0]);
+    });
+});
+
+// save a new service
+app.post('/v1/services', jsonParser, function(req, res){
+    var service = Service(req.body);
+    // console.log(crime);
+    service.save(function(er){
+        if(er){
+            console.log(er);
+            res.status(500).send('{ "message" : "Unable to save service"}');
+        }
+        else res.status(200).json(Service(req.body));
+    });
+});
+
+// delete a service
+app.delete('/v1/services/:serviceid', function(req, res){
+    Service.find({_id:req.params.serviceid}, function(err, service){
+        // console.log(job);
+        if(err) {
+            res.status(500).send('{ "message" : "Unable to delete service"}');
+        }
+        else if(service.length == 0){
+            res.status(404).send('{ "message" : "Service not found"}');
+        }
+        else{
+            try{
+                Service.findOneAndRemove({_id:req.params.serviceid}, function(error){
+                    if(error) return res.status(500).send('{ "status" : "Unable to delete service" }');
+                    else{
+                        res.status(200).send('{ "status" : "Service deleted" }');
+                    }
+                });
+            }
+            catch(e){
+                res.status(404).send('{ "message" : "Service not found"}');
+            }
+        }
+    });
+});
+
+// update a service
+app.put('/v1/services/:serviceid', jsonParser, function(req, res){
+    // first find the user and then update him/her
+    Service.find({_id:req.params.serviceid},function(error, service){
+        if(error){res.status(404).send('{ "message" : "service not found"}');}
+        else if(service.length ==0){
+            res.status(404).send('{ "message" : "service not found"}');
+        }
+        else{
+            console.log("[api] service found");
+            var nservice = req.body;
+            Service.findOneAndUpdate({_id:req.params.serviceid},nservice,function(e,u){
+                if(e) return res.status(500).send('{ "status" : "Failed to update service" }');
+                else{
+                    console.log("[api] service updated");
+                    res.status(200).send(nservice);
+                }
+            });
+        }
+    });
+});
+//
+
+//***************************** User apis start here **************************
+
+// USER API v1.0.0
+// get all users
+app.get('/v1/users', function(req, res){
+    User.find({}, function(error, users){
+        if(error) res.status(500).send('{ "message" : "Unable to fetch users"}');
+        res.status(200).json(users.reverse());
+    });
+});
+
+// get particular user by email id
+app.get('/v1/users/:email', function(req, res){
+    User.find({email:req.params.email}, function(error, user){
+
+        if(error) {
+            res.status(500).send('{ "message" : "Failed to find user"}');
+        }
+        else if(user.length == 0){
+            res.status(404).send('{ "message" : "User not found"}');
+        }
+        else {
+            res.status(200).json(user);
+        }
+    });
+});
+
+// create new user
+app.post('/v1/users', jsonParser, function(req, res){
+    // check if the email id is already taken
+    User.find({email:req.body.email},function(error, user){
         if(error){res.status(500).send('{ "message" : "Unable to register user"}');}
         else if(user.length != 0){
-
             res.status(404).send('{ "message" : "Email already registerd"}');
-
         }
         else{
             var user = User(req.body).save(function(error){
                 if(error) res.status(500).send('{ "message" : "Unable to register user"}');
                 res.status(200).json(User(req.body));
-
             });
         }
     });
-
 });
 
-
-
-app.get('/v1/analytics/postcounts', function(req, res){
-    var counts = {};
-    Event.find({}, function(e1, es){
-        counts.events = es.length;
-        Job.find({}, function(e2, jb){
-            counts.jobs = jb.length;
-            Accomodation.find({}, function(e3,as){
-                counts.accomodations = as.length;
-                res.status(200).send(counts);
-            });
-        });
-    });
-});
-
-// get no of users from each branch
-app.get('/v1/analytics/majorcounts', function(req, res){
-    var majorcounts = {};
-    User.find({"user_major": "IE"}, function(e1, es){
-        majorcounts.IE = es.length;
-        User.find({"user_major": "CS"}, function(e2, cs){
-            majorcounts.CS = cs.length;
-            User.find({"user_major": "SE"}, function(e2, se){
-                majorcounts.SE = se.length;
-                User.find({"user_major": "EE"}, function(e2, ee){
-                    majorcounts.EE = ee.length;
-                    User.find({"user_major": "CE"}, function(e2, ce){
-                        majorcounts.CE = ce.length;
-                        res.status(200).send(majorcounts);
-                    });
+// delete user profile by email id
+app.delete('/v1/users/:email', function(req,res){
+    // first find the user and then delete him/her
+    User.find({email:req.params.email},function(error, user){
+        // console.log(user);
+        if(error){res.status(500).send('{ "message" : "Unable to delete user"}');}
+        else if(user.length == 0){
+            res.status(404).send('{ "message" : "User not found"}');
+        }
+        else{
+            try{
+                User.findOneAndRemove( { email:user[0].email }, function(err){
+                    if(err) return res.status(500).send('{ "status" : "Unable to delete user" }');
+                    res.status(200).send('{ "status" : "User deleted" }');
                 });
-            });
-        });
+            }
+            catch(error){
+                res.status(404).send('{ "message" : "User not found"}');
+            }
+        }
     });
 });
-
-// get no of accomodations according to price range
-app.get('/v1/analytics/accomodationprices', function(req, res){
-    var pricerangecounts = {};
-    Accomodation.find({rent : {$lte:400}}, function(e,a){
-        console.log("a < 400 :" + a.length);
-        pricerangecounts.low = a.length;
-        Accomodation.find({rent : {$gt:400, $lte:600}}, function(e,a2){
-            pricerangecounts.mid = a2.length;
-            Accomodation.find({rent : {$gt:600}}, function(e,a3){
-                pricerangecounts.high = a3.length;
-                res.status(200).send(pricerangecounts);
-            });
-        });
-
-    });
-});
-
-
-// get no of jobs according to pay
-app.get('/v1/analytics/jobrates', function(req, res){
-    var jobratecounts = {};
-    Job.find({payrate : {$lte:12}}, function(e,a){
-        jobratecounts.low = a.length;
-        Job.find({payrate : {$gt:12, $lte:18}}, function(e,a2){
-            jobratecounts.mid = a2.length;
-            Job.find({payrate : {$gt:18}}, function(e,a3){
-                jobratecounts.high = a3.length;
-                res.status(200).send(jobratecounts);
-            });
-        });
-    });
-});
-
-// get no of events according to fees
-app.get('/v1/analytics/eventscount', function(req, res){
-    var eventscounts = {};
-    Event.find({entryfees : {$lte:15}}, function(e,a){
-        eventscounts.low = a.length;
-        Event.find({entryfees : {$gt:15, $lte:30}}, function(e,a2){
-            eventscounts.mid = a2.length;
-            Event.find({entryfees : {$gt:30}}, function(e,a3){
-                eventscounts.high = a3.length;
-                res.status(200).send(eventscounts);
-            });
-        });
-    });
-});
-
-
-app.post('/v1/jobs',function(req, res){
-    var job = Job(req.body);
-    job.save(function(er){
-        if(er) res.status(500).send('{ "message" : "Unable to save job"}');
-        else res.status(200).json(Job(req.body));
-    });
-});
-
-
 
 // update user profile - with email id
-app.put('/v1/users/:user_emailid', function(req, res){
-
-    // console.log(req.body);
-
+app.put('/v1/users/:email', jsonParser, function(req, res){
     // first find the user and then update him/her
-    User.find({user_emailid:req.params.user_emailid},function(error, user){
-        // console.log(user[0]);
-
-        var up = user[0];
-
-        var new_user = req.body;
-
-        up.username = new_user.username;
-        up.user_emailid = new_user.user_emailid;
-        up.user_profilepicture_url = new_user.user_profilepicture_url;
-        up.user_password = new_user.user_password;
-        up.user_major = new_user.user_major;
-        up.user_degree = new_user.user_degree;
-
-        console.log(up.user_profilepicture_url);
-
+    User.find({email:req.params.email},function(error, user){
         if(error){res.status(404).send('{ "message" : "User not found"}');}
         else{
             console.log("[api] user found");
-
-            User.findOneAndUpdate({'user_emailid':req.params.user_emailid},up,function(e,u){
+            var new_user = req.body;
+            User.findOneAndUpdate({'email':req.params.email},new_user,function(e,u){
                 if(e) return res.status(500).send('{ "status" : "Failed to update user" }');
                 else{
                     console.log("[api] user updated");
@@ -321,119 +388,41 @@ app.put('/v1/users/:user_emailid', function(req, res){
     });
 });
 
+// user login
+// hostname/v1/users/xxx/login
+app.post('/v1/users/login', jsonParser, function(req, res){
 
+    console.log('[api] authenticating - ' + req.body.email);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
+    console.log('[api] ' + req.body);
 
-// EVENT API v1.0.0
+    User.find({email:req.body.email}, function(error, user){
 
-// get all events
-app.get('/v1/events', function(req, res){
-    Event.find({}, function(err, events){
-        if(err) res.status(500).send('{ "message" : "Unable to fetch events"}');
-        res.status(200).json(events.reverse());
-    });
-});
-//
-// // get a particular event
-// app.get('/v1/events/:eventId', function(req, res){
-//     Event.find( { _id:req.params.eventId }, function(error, event){
-//         if(event.length == 0){
-//             res.status(404).send('{ "message" : "Event not found"}');
-//         }
-//         if(error) res.status(500).send('{ "message" : "Unable to fetch events"}');
-//         res.status(200).json(event[0]);
-//     });
-// });
-//
-// // create new event
+        var temp = JSON.parse(JSON.stringify(user));
+        if(error){res.status(404).send('{ "message" : "User not found"}');}
+        else{
+            var in_pwd = req.body.password;
+            var usr_pwd = temp[0]['password'];
 
-app.post('/v1/events', jsonParser, function(req, res){
-    var e = Event(req.body);
-    e.save(function(err){
-        if(err) res.status(500).send('{ "message" : "Unable to save event"}');
-        else res.status(200).json(req.body);
-    });
-});
-//
-// // update event
-// app.put('/v1/events/:eventid', jsonParser, function(req, res){
-//     // first find the user and then update him/her
-//     Event.find({_id:req.params.eventid},function(error, event){
-//         if(error){res.status(404).send('{ "message" : "Event not found"}');}
-//         else if(event.length ==0){
-//             res.status(404).send('{ "message" : "Event not found"}');
-//         }
-//         else{
-//             console.log("[api] event found");
-//             var nevent = req.body;
-//             Event.findOneAndUpdate({_id:req.params.eventid},nevent,function(e,u){
-//                 if(e) return res.status(500).send('{ "status" : "Failed to update event" }');
-//                 else{
-//                     console.log("[api] event updated");
-//                     res.status(200).send(nevent);
-//                 }
-//             });
-//         }
-//     });
-// });
-//
-//
-// // delete event
-// app.delete('/v1/events/:eventid', function(req, res){
-//     Event.find({_id:req.params.eventid}, function(err, event){
-//         console.log(event);
-//         if(err) {
-//             res.status(500).send('{ "message" : "Unable to delete event"}');
-//         }
-//         else if(event.length == 0){
-//             res.status(404).send('{ "message" : "Event not found"}');
-//         }
-//         else{
-//             try{
-//                 Event.findOneAndRemove({_id:req.params.eventid}, function(error){
-//                     if(error) return res.status(500).send('{ "status" : "Unable to delete event" }');
-//                     else{
-//                         res.status(200).send('{ "status" : "Event deleted" }');
-//                     }
-//                 });
-//             }
-//             catch(e){
-//                 res.status(404).send('{ "message" : "Event not found"}');
-//             }
-//         }
-//     });
-// });
+            // compare the passwords
+            if(in_pwd !== usr_pwd)
+            {
+                console.log('[api] login fail');
+                return res.status(200).send('{"message":"Login failed"}');
+            }
+            else
+            {
+                console.log('[api] login success');
+                // req.session.userid = 1
+                return res.status(200).send('{"message":"Login successful"}');
 
-
-//accomodation
-
-
-app.get('/v1/accomodations', function(req, res){
-    console.log("I am in accomodation");
-    Accomodation.find({}, function(err, accomodations){
-        if(err) res.status(500).send('{ "message" : "Unable to fetch accomodations"}');
-        console.log("get accomodation gives"+accomodations);
-        res.status(200).json(accomodations);
+            }
+        }
     });
 });
 
 
-
-app.post('/v1/accomodations', jsonParser, function(req,res){
-    var acc = Accomodation(req.body);
-    acc.save(function(err){
-        if(err)res.status(500).send('{ "message" : "Unable to save accomodation"}');
-        else res.status(200).json(acc);
-    });
-});
-
-
-
-
-
-
-// **** event controller ends here ***********
+//****************** Amit API ****************************//

@@ -1,12 +1,15 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-  username : String,
-  user_emailid : String,
-  user_password : String,
-  user_profilepicture_url : String,
-  user_degree : String,
-  user_major : String
+   name : String,
+   address : String,
+   email : String,
+   phone : String,
+   password : String,
+   community : {},
+   servivces : []
+
 });
 
+/* name, email, add, phone, password, communityName, services*/
 module.exports = userSchema;

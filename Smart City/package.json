@@ -7,17 +7,17 @@
   },
   "dependencies": {
     "angular": "^1.5.8",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
     "chai": "^3.5.0",
     "client-sessions": "^0.7.0",
     "ejs": "*",
-    "express": "3.2.6",
+    "express": "^3.2.6",
     "mocha": "^3.1.2",
+    "mongoose": "^4.9.9",
     "mysql": "^2.11.1",
     "request": "^2.75.0",
-    "winston": "^2.2.0",
-    "mongoose": "^4.9.7",
-    "bluebird": "^3.5.0",
-    "body-parser": "^1.17.1"
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "should": "^11.1.1",

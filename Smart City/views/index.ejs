@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app=""myApp">
+<html lang="en" >
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
@@ -8,8 +12,9 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Smart City</title>
 
+  <title>Smart City</title>
+    <script src="angular/indexController.js"></script>
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
@@ -41,10 +46,13 @@
   ======================================================= -->
 </head>
 
-<body ng-controller="AppCtrl">
+<body ng-app="myApp" ng-controller="AppCtrl" ng-init="getUser(); getCluster(); getService()">
 <!-- container section start -->
 <section id="container" class="">
+<script>
 
+
+</script>
 
   <header class="header dark-bg">
     <div class="toggle-nav">
@@ -312,9 +320,9 @@
             <span class="menu-arrow arrow_carrot-right"></span>
           </a>
           <ul class="sub">
-            <li><a class="" href="form_component.html">Client Node</a></li>
-            <li><a class="" href="form_validation.html">Service Node</a></li>
-            <li><a class="" href="form_validation.html">Smart Node</a></li>
+            <li><a class="" href="" data-toggle="modal" data-target="#AddClientModal">Client Node</a></li>
+            <li><a class="" href="" data-toggle="modal" data-target="#AddServiceModal">Service Node</a></li>
+            <li><a class="" href="" data-toggle="modal" data-target="#AddSmartModal">Smart Node</a></li>
           </ul>
         </li>
         <li class="sub-menu">
@@ -325,7 +333,7 @@
           </a>
           <ul class="sub">
             <li><a class="" href="form_component.html">Client Node</a></li>
-            <li><a class="" href="form_validation.html">Service Node</a></li>
+            <li><a class="" href="" ng-click="getService()" data-toggle="modal" data-target="#DeleteServiceModal">Service Node</a></li>
             <li><a class="" href="form_validation.html">Smart Node</a></li>
           </ul>
         </li>
@@ -348,8 +356,9 @@
             <span class="menu-arrow arrow_carrot-right"></span>
           </a>
           <ul class="sub">
-            <li><a class="" href="form_component.html">Add Cluster</a></li>
-            <li><a class="" href="form_validation.html">Delete Cluster</a></li>
+            <li><a class="" ng-click="" data-toggle="modal" data-target="#AddClusterModal">Add Cluster</a></li>
+
+            <li><a class="" href="" ng-click="getCluster()" data-toggle="modal" data-target="#DeleteClusterModal">Delete Cluster</a></li>
             <li><a class="" href="form_validation.html">Update Cluster</a></li>
           </ul>
         </li>
@@ -408,15 +417,15 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="info-box blue-bg">
             <i class="fa fa-adjust"></i>
-            <div class="count">5</div>
-            <div class="title">Total Nodes</div>
+            <div class="count">{{alluser.length}}</div>
+            <div class="title">Total Users</div>
           </div><!--/.info-box-->
         </div><!--/.col-->
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="info-box brown-bg">
             <i class="fa fa-shopping-cart"></i>
-            <div class="count">1</div>
+            <div class="count">{{allcluster.length}}</div>
             <div class="title">Total Cluster</div>
           </div><!--/.info-box-->
         </div><!--/.col-->
@@ -432,7 +441,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="info-box green-bg">
             <i class="fa fa-cubes"></i>
-            <div class="count">1</div>
+            <div class="count">{{allservice.length}}</div>
             <div class="title">Total Services</div>
           </div><!--/.info-box-->
         </div><!--/.col-->
@@ -1043,6 +1052,162 @@
         <!--&ndash;&gt;-->
         <!--<a href="https://bootstrapmade.com/free-business-bootstrap-themes-website-templates/">Business Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>-->
       <!--</div>-->
+
+
+          <div class="modal fade" id="AddClusterModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Add Cluster</h4>
+                      </div>
+                      <div class="modal-body">
+                          <p>Name &nbsp; :&nbsp; &nbsp;  <input type="text" ng-model="clusterName" required></p>
+                          <p>Address &nbsp; :&nbsp; &nbsp;  <input type="text" ng-model="clusterAddress" required></p>
+                          <p>URL &nbsp; : <input type="text" ng-model="clusterUrl" required></p>
+                          <p>Community Representative &nbsp; :&nbsp; &nbsp; <select ng-model="communityRepresentative" required>
+                                  <option value="nitin">Nitinkumar Gove</option>
+                                  <option value="amit">Amit</option>
+                                  <option value="yugal">Yugal</option></select></p>
+
+                          <!--<p>Services &nbsp; :-->
+                          <!--<div><br> <input type="checkbox" name="selectedservice[]" value="{{service}}" ng-checked="selectedservices.indexof(service)>-1" ng-click="selectservices(service)" >{{service}}</div> </p>-->
+
+                          <!--<p>Services &nbsp; : <br><input type="checkbox" ng-model="service1">&nbsp;Service 1-->
+                              <!--<br>-->
+                              <!--<input type="checkbox" ng-model="service2">&nbsp;Service 2<br>-->
+                          <!--<input type="checkbox" ng-model="service3">&nbsp;Service 3</p>-->
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-danger" ng-click="addCluster()" data-dismiss="modal">Submit</button>
+                      </div>
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+          </div>
+
+
+          <div class="modal fade" id="DeleteClusterModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Delete Cluster</h4>
+                      </div>
+                      <div class="modal-body">
+                      <table width="100%">
+                      <tr ng-repeat="cluster in allcluster">
+                          <td>
+                              {{cluster.name}}
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-danger" ng-click="deleteCluster(cluster._id);" data-dismiss="modal">Delete</button>
+                          </td>
+
+                      </table>
+
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                      </div>
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+          </div>
+
+
+          <div class="modal fade" id="AddClientModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Add Client Node</h4>
+                      </div>
+                      <div class="modal-body">
+
+
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+
+                      </div>
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+          </div>
+
+          <div class="modal fade" id="AddServiceModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Add Service Node</h4>
+                      </div>
+                      <div class="modal-body">
+                          <p>Title &nbsp; :&nbsp; &nbsp;  <input type="text" ng-model="serviceTitle" required></p>
+                          <p>Description &nbsp; :&nbsp; &nbsp;  <input type="text" ng-model="serviceDescription" required></p>
+                          <p>Status &nbsp; : <input type="radio" ng-model="serviceStatus" value="true">Activate &nbsp; &nbsp;
+                              <input type="radio" ng-model="serviceStatus" value="false">Deactivate</p>
+                          <p>URL &nbsp; : <input type="text" ng-model="serviceURL" required></p>
+                          <p>Services Provided &nbsp; : <input type="text" ng-model="servicesProvided" required></p>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-danger" ng-click="addService()" data-dismiss="modal">Submit</button>
+
+                      </div>
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+          </div>
+
+
+          <div class="modal fade" id="DeleteServiceModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Delete Service</h4>
+                      </div>
+                      <div class="modal-body">
+                          <table width="100%">
+                              <tr ng-repeat="service in allservice">
+                                  <td>
+                                      {{service.title}}
+                                  </td>
+                                  <td>
+                                      <button type="button" class="btn btn-danger" ng-click="deleteService(service._id);" data-dismiss="modal">Delete</button>
+                                  </td>
+
+                          </table>
+
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                      </div>
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+          </div>
+
+          <div class="modal fade" id="AddSmartModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Add Smart Node</h4>
+                      </div>
+                      <div class="modal-body">
+                          <p>Test Modal</p>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                      </div>
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+          </div>
+
+
     </div>
   </section>
   <!--main content end-->
@@ -1073,6 +1238,7 @@
 <!-- custom select -->
 <script src="js/jquery.customSelect.min.js" ></script>
 <script src="assets/chart-master/Chart.js"></script>
+
 
 <!--custome script for all page-->
 <script src="js/scripts.js"></script>
