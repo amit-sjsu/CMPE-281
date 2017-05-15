@@ -9,8 +9,8 @@ var express = require('express'),
     session = require('client-sessions');
 
 
-var AWS = require('aws-sdk');
-AWS.config.loadFromPath('./config.json');
+//var AWS = require('aws-sdk');
+//AWS.config.loadFromPath('./config.json');
 
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
@@ -73,7 +73,7 @@ app.get('/signup', home.redirectToSignup);
 app.get('/connectCluster', home.redirectToConnectCluster);
 app.get('/ClientDashboard', home.redirectToClientDashboard);
 app.get('/AdminDashboard', home.redirectToAdminDashboard);
-app.get('/Analytics', home.);
+app.get('/Analytics', home.redirectToAnalytics);
 
 // EC2 instance creation
 //

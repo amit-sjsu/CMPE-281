@@ -29,3 +29,7 @@ exports.redirectToClientDashboard = function(req,res) {
 exports.redirectToAdminDashboard = function(req,res) {
     res.render('index');
 };
+
+exports.redirectToAnalytics = function(req, res) {
+    res.render('analytics');
+}
