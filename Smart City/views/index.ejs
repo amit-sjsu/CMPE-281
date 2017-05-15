@@ -356,7 +356,7 @@
             <span class="menu-arrow arrow_carrot-right"></span>
           </a>
           <ul class="sub">
-            <li><a class="" ng-click="" data-toggle="modal" data-target="#AddClusterModal">Add Cluster</a></li>
+            <li><a class="" ng-click="getService()" data-toggle="modal" data-target="#AddClusterModal">Add Cluster</a></li>
 
             <li><a class="" href="" ng-click="getCluster()" data-toggle="modal" data-target="#DeleteClusterModal">Delete Cluster</a></li>
             <li><a class="" href="form_validation.html">Update Cluster</a></li>
@@ -377,10 +377,9 @@
 
 
         <li>
-          <a class="" href="chart-chartjs.html">
+          <a class="" href="/Analytics">
             <i class="icon_piechart"></i>
-            <span>Analysis</span>
-
+            <span>Analytics</span>
           </a>
 
         </li>
@@ -1070,7 +1069,9 @@
                                   <option value="amit">Amit</option>
                                   <option value="yugal">Yugal</option></select></p>
 
-                          <!--<p>Services &nbsp; :-->
+                          <p>Services &nbsp; : &nbsp;
+                          <div ng-repeat="oneservice in allservice"> <input type="checkbox" ng-model="services" value="{{oneservice._id}}">&nbsp;{{oneservice.title}}<br></div>
+                          </p>
                           <!--<div><br> <input type="checkbox" name="selectedservice[]" value="{{service}}" ng-checked="selectedservices.indexof(service)>-1" ng-click="selectservices(service)" >{{service}}</div> </p>-->
 
                           <!--<p>Services &nbsp; : <br><input type="checkbox" ng-model="service1">&nbsp;Service 1-->
@@ -1080,7 +1081,7 @@
                       </div>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-danger" ng-click="addCluster()" data-dismiss="modal">Submit</button>
+                          <button type="button" class="btn btn-success" ng-click="addCluster()" data-dismiss="modal">Submit</button>
                       </div>
                   </div><!-- /.modal-content -->
               </div><!-- /.modal-dialog -->
@@ -1153,7 +1154,7 @@
                       </div>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-danger" ng-click="addService()" data-dismiss="modal">Submit</button>
+                          <button type="button" class="btn btn-success" ng-click="addService()" data-dismiss="modal">Submit</button>
 
                       </div>
                   </div><!-- /.modal-content -->

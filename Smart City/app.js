@@ -73,6 +73,7 @@ app.get('/signup', home.redirectToSignup);
 app.get('/connectCluster', home.redirectToConnectCluster);
 app.get('/ClientDashboard', home.redirectToClientDashboard);
 app.get('/AdminDashboard', home.redirectToAdminDashboard);
+app.get('/Analytics', home.);
 
 // EC2 instance creation
 //

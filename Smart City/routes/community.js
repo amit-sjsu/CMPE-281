@@ -5,7 +5,7 @@ var communitySchema = mongoose.Schema({
    address : String,
    url : String,
    communityRepresentative : {}, // user object should be sent here
-  // services : [] // array of json objects of selected services to be allowed
+   services : [] // array of json objects of selected services to be allowed
 });
 
 module.exports = communitySchema;

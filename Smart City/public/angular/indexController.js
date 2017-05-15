@@ -96,7 +96,7 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
 
 
     $scope.addCluster = function() {
-        console.log("Adding new cluster");
+        console.log("Adding new cluster"+$scope.services);
         $http({
             method:'post',
             url:'/v1/communities',
@@ -104,13 +104,13 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
                 "name":$scope.clusterName,
                 "address":$scope.clusterAddress,
                 "url":$scope.clusterUrl,
-                "communityRepresentative":$scope.communityRepresentative
+                "communityRepresentative":$scope.communityRepresentative,
+                "services": $scope.services
                 //services to be included here
             }
         }).success(function(data) {
             console.log("New Cluster Added!");
         });
-
     }
 
     $scope.getCluster = function() {
@@ -160,7 +160,7 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
             method: 'get',
             url: '/v1/services'
         }).success(function(data) {
-            console.log("Getting all the services");
+            console.log(data);
             $scope.allservice = data;
         });
     }
