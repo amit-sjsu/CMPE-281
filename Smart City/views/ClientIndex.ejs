@@ -183,7 +183,7 @@
                  <h1 style="margin-left: 1%">Your Community Services</h1>
                     <div class="col-md-12" ng-repeat="service in Services">
 
-                        <div  class="info-box blue-bg">
+                        <div  class="info-box blue-bg" ng-click="displayService($event)">
                             <i class="fa fa-adjust"></i>
                             <div class="count">1</div>
                             <div class="title">{{service.title}}</div>

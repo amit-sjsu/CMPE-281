@@ -67,5 +67,13 @@ myApp.controller("ClientCtrl", function($scope,$http,$window) {
 
     }
 
+    $scope.displayService= function(e){
+
+        var elem = angular.element(e.srcElement);
+
+        // alert($(elem.parent()).serialize());
+
+    }
+
 
 });
