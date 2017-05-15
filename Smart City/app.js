@@ -26,12 +26,21 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var userSchema = require('./routes/user.js');
 var User = mongoose.model('user', userSchema);
+
 var communitySchema = require('./routes/User.js');
 var Community = mongoose.model('Community', communitySchema);
-var crimeSchema = require('./routes/User.js');
+
+var crimeSchema = require('./routes/crime.js');
 var Crime = mongoose.model('Crime', crimeSchema);
+
+var eventSchema = require('./routes/event.js');
+var Event = mongoose.model('Event', eventSchema);
+
+
 var serviceSchema = require('./routes/service.js');
 var Service = mongoose.model('Service', serviceSchema);
+
+
 var jsonParser = bodyParser.json();
 var app = express();
 
@@ -388,6 +397,201 @@ app.put('/v1/users/:email', jsonParser, function(req, res){
         }
     });
 });
+
+
+
+//***************************** Crime services apis start here **************************
+
+// get all crimes available
+app.get('/v1/crimes', function(req, res){
+    Crime.find({}, function(error, crimes){
+        if(error) res.status(500).send('{ "message" : "Unable to fetch crimes"}');
+        res.status(200).json(crimes.reverse());
+    });
+});
+
+// get a particular crime
+app.get('/v1/crimes/:crimeid', function(req, res){
+
+    Crime.find( { _id:req.params.crimeid }, function(error, crime){
+        if(error) res.status(500).send('{ "message" : "Unable to fetch crime"}');
+        else if(crime.length == 0){
+            res.status(404).send('{ "message" : "Crime not found"}');
+        }
+        else
+            res.status(200).json(crime[0]);
+    });
+});
+
+// save a new crime
+app.post('/v1/crimes', jsonParser, function(req, res){
+
+
+    console.log(req.body);
+
+    var crime = Crime(req.body);
+    console.log(crime);
+
+
+    crime.save(function(er){
+        if(er){
+            console.log(er);
+            res.status(500).send('{ "message" : "Unable to save Crime"}');
+        }
+        else res.status(200).json(Crime(req.body));
+    });
+});
+
+// delete a crime
+app.delete('/v1/crimes/:crimeid', function(req, res){
+    Crime.find({_id:req.params.crimeid}, function(err, crime){
+        // console.log(job);
+        if(err) {
+            res.status(500).send('{ "message" : "Unable to delete crime"}');
+        }
+        else if(crime.length == 0){
+            res.status(404).send('{ "message" : "Crime not found"}');
+        }
+        else{
+            try{
+                Crime.findOneAndRemove({_id:req.params.crimeid}, function(error){
+                    if(error) return res.status(500).send('{ "status" : "Unable to delete job" }');
+                    else{
+                        res.status(200).send('{ "status" : "Crime deleted" }');
+                    }
+                });
+            }
+            catch(e){
+                res.status(404).send('{ "message" : "Crime not found"}');
+            }
+        }
+    });
+});
+
+// update a crime
+app.put('/v1/crimes/:crimeid', jsonParser, function(req, res){
+    // first find the user and then update him/her
+    Crime.find({_id:req.params.crimeid},function(error, crime){
+        if(error){res.status(404).send('{ "message" : "Crime not found"}');}
+        else if(crime.length ==0){
+            res.status(404).send('{ "message" : "Crime not found"}');
+        }
+        else{
+            console.log("[api] Crime found");
+            var ncrime = req.body;
+            Crime.findOneAndUpdate({_id:req.params.crimeid},ncrime,function(e,u){
+                if(e) return res.status(500).send('{ "status" : "Failed to update crime" }');
+                else{
+                    console.log("[api] crime updated");
+                    res.status(200).send(ncrime);
+                }
+            });
+        }
+    });
+});
+
+
+//end of crime services
+
+
+
+// EVENT API v1.0.0
+
+// get all events
+app.get('/v1/events', function(req, res){
+
+    console.log("I am in event api");
+    console.log(req.body);
+
+    Event.find({}, function(err, events){
+        if(err) res.status(500).send('{ "message" : "Unable to fetch events"}');
+        res.status(200).json(events);
+    });
+});
+
+// get a particular event
+app.get('/v1/events/:eventId', function(req, res){
+    Event.find( { _id:req.params.eventId }, function(error, event){
+        if(event.length == 0){
+            res.status(404).send('{ "message" : "Event not found"}');
+        }
+        if(error) res.status(500).send('{ "message" : "Unable to fetch events"}');
+        res.status(200).json(event[0]);
+    });
+});
+
+// create new event
+app.post('/v1/events', jsonParser, function(req, res){
+    console.log("I am in event api");
+    console.log(req.body);
+
+    var e = Event(req.body);
+    e.save(function(err){
+        if(err) res.status(500).send('{ "message" : "Unable to save event"}');
+        else res.status(200).json(req.body);
+    });
+});
+
+// update event
+app.put('/v1/events/:eventid', jsonParser, function(req, res){
+    // first find the user and then update him/her
+    Event.find({_id:req.params.eventid},function(error, event){
+        if(error){res.status(404).send('{ "message" : "Event not found"}');}
+        else if(event.length ==0){
+            res.status(404).send('{ "message" : "Event not found"}');
+        }
+        else{
+            console.log("[api] event found");
+            var nevent = req.body;
+            Event.findOneAndUpdate({_id:req.params.eventid},nevent,function(e,u){
+                if(e) return res.status(500).send('{ "status" : "Failed to update event" }');
+                else{
+                    console.log("[api] event updated");
+                    res.status(200).send(nevent);
+                }
+            });
+        }
+    });
+});
+
+
+// delete event
+app.delete('/v1/events/:eventid', function(req, res){
+    Event.find({_id:req.params.eventid}, function(err, event){
+        // console.log(event);
+        if(err) {
+            res.status(500).send('{ "message" : "Unable to delete event"}');
+        }
+        else if(event.length == 0){
+            res.status(404).send('{ "message" : "Event not found"}');
+        }
+        else{
+            try{
+                Event.findOneAndRemove({_id:req.params.eventid}, function(error){
+                    if(error) return res.status(500).send('{ "status" : "Unable to delete event" }');
+                    else{
+                        res.status(200).send('{ "status" : "Event deleted" }');
+                    }
+                });
+            }
+            catch(e){
+                res.status(404).send('{ "message" : "Event not found"}');
+            }
+        }
+    });
+});
+
+// **** event controller ends here ***********
+
+
+
+
+
+
+
+
+
+
 
 // user login
 // hostname/v1/users/xxx/login
