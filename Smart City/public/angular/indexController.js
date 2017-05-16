@@ -33,30 +33,39 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
 
         var email=$scope.user;
 
+        if(email==="admin@gmail.com")
+        {
+            window.location.assign("/AdminDashboard");
+        }
 
-        $http({
-            method: "GET",
-            url: '/v1/users/'+email,
-            data: {}
-        }).success(function (data) {
+        else{
+
+            $http({
+                method: "GET",
+                url: '/v1/users/'+email,
+                data: {}
+            }).success(function (data) {
 
 
 
 
-            console.log(data);   console.log(data[0].community);
-            sessionStorage.setItem("user",JSON.stringify(data[0]));
-            sessionStorage.setItem("UserName",data[0].name);
-            sessionStorage.setItem("community",JSON.stringify(data[0].community));
-            window.location.assign("/login");
+                console.log(data);   console.log(data[0].community);
+                sessionStorage.setItem("user",JSON.stringify(data[0]));
+                sessionStorage.setItem("UserName",data[0].name);
+                sessionStorage.setItem("community",JSON.stringify(data[0].community));
+                window.location.assign("/login");
 
-        }).error(function (error) {
+            }).error(function (error) {
 
-            $scope.unexpected_error = false;
-            $scope.invalid_login = true;
-            $window.alert("Login Failed");
-            window.location.assign("/");
+                $scope.unexpected_error = false;
+                $scope.invalid_login = true;
+                $window.alert("Login Failed");
+                window.location.assign("/");
 
-        });
+            });
+
+
+        }
 
 
     }
