@@ -592,9 +592,9 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
     }
 
 
-    $scope.login=function() {
-        window.location.assign("/login");
-    };
+    // $scope.login=function() {
+    //     window.location.assign("/login");
+    // };
 
 
 });
