@@ -371,7 +371,16 @@ angular.module("myApp", [])
 
 
 
-
+        $scope.getUsers= function() { 
+            console.log("Control getting here"); 
+            $http({ 
+                method: 'GET', 
+                url: '/v1/users', 
+            }).success(function(data) { 
+                $scope.users = data; 
+                console.log("Getting all users"); 
+            }) 
+        }
 
 
 

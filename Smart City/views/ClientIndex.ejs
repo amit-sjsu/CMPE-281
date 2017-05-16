@@ -131,7 +131,7 @@
                             <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
                         </li>
                         <li>
-                            <a data-toggle="modal" data-target="#chat" ><i class="icon_chat_alt"></i> Message to user</a>
+                            <a data-toggle="modal" data-target="#chat" ng-click="getUsers()"><i class="icon_chat_alt"></i> Message to user</a>
                         </li>
                         <li>
                             <a href="#"><i class="icon_key_alt"></i> Settings</a>
@@ -434,10 +434,7 @@
                 </div>
                 <div class="modal-body row" style="margin-left: 10px;">
                     Select User :- <select>
-                        <option value="volvo">User 1</option>
-                        <option value="saab">User 2</option>
-                        <option value="mercedes">User 3</option>
-                        <option value="audi">User 4</option>
+                        <option ng-repeat="user in users" value="user._id">{{user.name}}</option>
                     </select>
                 </div>
                 <div class="modal-body row" style="margin-left: 10px;">
