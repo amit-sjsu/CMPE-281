@@ -24,7 +24,8 @@ console.log('[community api] community db : connected');
 var home = require('./routes/home');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var userSchema = require('./routes/user.js');
+
+var userSchema = require('./routes/User.js');
 var User = mongoose.model('user', userSchema);
 
 var communitySchema = require('./routes/User.js');
