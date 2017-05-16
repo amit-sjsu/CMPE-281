@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0382f51e-4dd8-411a-b95d-467d702999b2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart City/app.js" afterPath="$PROJECT_DIR$/Smart City/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart City/public/angular/ClientController.js" afterPath="$PROJECT_DIR$/Smart City/public/angular/ClientController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart City/public/angular/indexController.js" afterPath="$PROJECT_DIR$/Smart City/public/angular/indexController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart City/views/analytics.ejs" afterPath="$PROJECT_DIR$/Smart City/views/analytics.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart City/views/index.ejs" afterPath="$PROJECT_DIR$/Smart City/views/index.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart City/views/ClientIndex.ejs" afterPath="$PROJECT_DIR$/Smart City/views/ClientIndex.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart City/views/ConnectCluster.ejs" afterPath="$PROJECT_DIR$/Smart City/views/ConnectCluster.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart City/views/Signup.ejs" afterPath="$PROJECT_DIR$/Smart City/views/Signup.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Smart City/views/login.ejs" afterPath="$PROJECT_DIR$/Smart City/views/login.ejs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,26 +28,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Smart City/views/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="386" column="11" lean-forward="true" selection-start-line="386" selection-start-column="11" selection-end-line="386" selection-end-column="11" />
+            <state relative-caret-position="0">
+              <caret line="1" column="17" lean-forward="true" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
               <folding>
                 <element signature="e#47817#47823#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="analytics.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Smart City/views/analytics.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="372" column="24" lean-forward="false" selection-start-line="372" selection-start-column="24" selection-end-line="372" selection-end-column="105" />
-              <folding>
-                <element signature="n#style#0;n#span#0;n#a#0;n#li#0;n#ul#0;n#h2#0;n#div#0;n#div#0;n#div#0;n#div#1;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#a#0;n#li#0;n#ul#0;n#h2#0;n#div#0;n#div#0;n#div#0;n#div#2;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -55,23 +43,23 @@
       <file leaf-file-name="indexController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Smart City/public/angular/indexController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="233" column="13" lean-forward="true" selection-start-line="233" selection-start-column="13" selection-end-line="233" selection-end-column="13" />
+            <state relative-caret-position="-331">
+              <caret line="112" column="0" lean-forward="true" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
               <folding>
-                <marker date="1494892572000" expanded="true" signature="13375:13389" ph="..." />
-                <marker date="1494892572000" expanded="true" signature="13461:13480" ph="..." />
-                <marker date="1494892572000" expanded="true" signature="15451:15465" ph="..." />
-                <marker date="1494892572000" expanded="true" signature="15537:15556" ph="..." />
+                <marker date="1494895430000" expanded="true" signature="13944:13958" ph="..." />
+                <marker date="1494895430000" expanded="true" signature="14030:14049" ph="..." />
+                <marker date="1494895430000" expanded="true" signature="16020:16034" ph="..." />
+                <marker date="1494895430000" expanded="true" signature="16106:16125" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Smart City/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="657" column="48" lean-forward="false" selection-start-line="657" selection-start-column="48" selection-end-line="657" selection-end-column="48" />
+            <state relative-caret-position="289">
+              <caret line="370" column="13" lean-forward="true" selection-start-line="370" selection-start-column="13" selection-end-line="370" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -111,9 +99,12 @@
       <find>First</find>
       <find>Add message</find>
       <find>postannouncement</find>
-      <find>delete</find>
-      <find>BroadcastModal</find>
       <find>message</find>
+      <find>BroadcastModal</find>
+      <find>delete</find>
+      <find>service</find>
+      <find>user</find>
+      <find>Message Link</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -127,8 +118,13 @@
         <option value="$PROJECT_DIR$/Smart City/public/angular/analytics.js" />
         <option value="$PROJECT_DIR$/Smart City/app.js" />
         <option value="$PROJECT_DIR$/Smart City/views/analytics.ejs" />
-        <option value="$PROJECT_DIR$/Smart City/public/angular/indexController.js" />
         <option value="$PROJECT_DIR$/Smart City/views/index.ejs" />
+        <option value="$PROJECT_DIR$/Smart City/views/ClientIndex.ejs" />
+        <option value="$PROJECT_DIR$/Smart City/public/angular/ClientController.js" />
+        <option value="$PROJECT_DIR$/Smart City/views/login.ejs" />
+        <option value="$PROJECT_DIR$/Smart City/views/Signup.ejs" />
+        <option value="$PROJECT_DIR$/Smart City/views/ConnectCluster.ejs" />
+        <option value="$PROJECT_DIR$/Smart City/public/angular/indexController.js" />
       </list>
     </option>
   </component>
@@ -369,18 +365,18 @@
       <option name="presentableId" value="Default" />
       <updated>1494823114860</updated>
       <workItem from="1494823116510" duration="4640000" />
-      <workItem from="1494875005512" duration="9964000" />
+      <workItem from="1494875005512" duration="11595000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14604000" />
+    <option name="totallyTimeSpent" value="16235000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="38" width="1280" height="725" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14217633" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18824464" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -429,10 +425,10 @@
         <state relative-caret-position="9450">
           <caret line="630" column="5" lean-forward="false" selection-start-line="630" selection-start-column="5" selection-end-line="630" selection-end-column="5" />
           <folding>
-            <marker date="1494892572000" expanded="true" signature="13375:13389" ph="..." />
-            <marker date="1494892572000" expanded="true" signature="13461:13480" ph="..." />
-            <marker date="1494892572000" expanded="true" signature="15451:15465" ph="..." />
-            <marker date="1494892572000" expanded="true" signature="15537:15556" ph="..." />
+            <marker date="1494895430000" expanded="true" signature="13944:13958" ph="..." />
+            <marker date="1494895430000" expanded="true" signature="14030:14049" ph="..." />
+            <marker date="1494895430000" expanded="true" signature="16020:16034" ph="..." />
+            <marker date="1494895430000" expanded="true" signature="16106:16125" ph="..." />
           </folding>
         </state>
       </provider>
@@ -529,24 +525,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Smart City/app.js">
+    <entry file="file://$PROJECT_DIR$/Smart City/public/angular/ClientController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="657" column="48" lean-forward="false" selection-start-line="657" selection-start-column="48" selection-end-line="657" selection-end-column="48" />
+        <state relative-caret-position="326">
+          <caret line="312" column="31" lean-forward="true" selection-start-line="312" selection-start-column="31" selection-end-line="312" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Smart City/public/angular/indexController.js">
+    <entry file="file://$PROJECT_DIR$/Smart City/views/ClientIndex.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="233" column="13" lean-forward="true" selection-start-line="233" selection-start-column="13" selection-end-line="233" selection-end-column="13" />
+        <state relative-caret-position="150">
+          <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
           <folding>
-            <marker date="1494892572000" expanded="true" signature="13375:13389" ph="..." />
-            <marker date="1494892572000" expanded="true" signature="13461:13480" ph="..." />
-            <marker date="1494892572000" expanded="true" signature="15451:15465" ph="..." />
-            <marker date="1494892572000" expanded="true" signature="15537:15556" ph="..." />
+            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#div#0;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#div#3;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#div#4;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#16815#16822#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#18042#18049#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#3;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#3;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#3;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Smart City/views/ConnectCluster.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Smart City/views/Signup.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="60" column="36" lean-forward="false" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -561,13 +594,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Smart City/views/login.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Smart City/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="386" column="11" lean-forward="true" selection-start-line="386" selection-start-column="11" selection-end-line="386" selection-end-column="11" />
+        <state relative-caret-position="0">
+          <caret line="1" column="17" lean-forward="true" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
           <folding>
             <element signature="e#47817#47823#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Smart City/public/angular/indexController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-331">
+          <caret line="112" column="0" lean-forward="true" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+          <folding>
+            <marker date="1494895430000" expanded="true" signature="13944:13958" ph="..." />
+            <marker date="1494895430000" expanded="true" signature="14030:14049" ph="..." />
+            <marker date="1494895430000" expanded="true" signature="16020:16034" ph="..." />
+            <marker date="1494895430000" expanded="true" signature="16106:16125" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Smart City/views/buttons.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-45">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Smart City/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="370" column="13" lean-forward="true" selection-start-line="370" selection-start-column="13" selection-end-line="370" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>

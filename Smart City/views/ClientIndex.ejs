@@ -82,55 +82,22 @@
                 <li id="mail_notificatoin_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="icon-envelope-l"></i>
-                        <span class="badge bg-important">5</span>
+                        <span class="badge bg-important">{{length}}</span>
                     </a>
                     <ul class="dropdown-menu extended inbox">
                         <div class="notify-arrow notify-arrow-blue"></div>
-                        <li>
-                            <p class="blue">You have 5 new messages</p>
+                        <li >
+                            <p class="blue">{{length}}</p>
                         </li>
-                        <li>
+                        <li  ng-repeat="announcement in announcements" >
                             <a href="#">
                                 <span class="photo"><img alt="avatar" src="./img/amitpandey.jpg"></span>
                                 <span class="subject">
-                                    <span class="from">Moderator</span>
-                                    <span class="time">1 min</span>
+                                    <span class="from">Admin</span>
+                                    <span class="time">{{announcement.date}}</span>
                                     </span>
-                                <span >I want to add to serives node</span>
+                                <span >{{announcement.message}}</span>
                             </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="photo"><img alt="avatar" src="./img/amitpandey.jpg"></span>
-                                <span class="subject">
-                                    <span class="from">Moderator</span>
-                                    <span class="time">5 mins</span>
-                                    </span>
-                                <span >Add more nodes to cluster 1</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="photo"><img alt="avatar" src="./img/amitpandey.jpg"></span>
-                                <span class="subject">
-                                    <span class="from">Moderator</span>
-                                    <span class="time">2 hrs</span>
-                                    </span>
-                                <span >Need to add more Cluster</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="photo"><img alt="avatar" src="./img/amitpandey.jpg"></span>
-                                <span class="subject">
-                                    <span class="from">Moderator</span>
-                                    <span class="time">1 day</span>
-                                    </span>
-                                <span >Add 5 client node to cluster 3</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">See all messages</a>
                         </li>
                     </ul>
                 </li>
@@ -152,14 +119,15 @@
                             <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
                         </li>
                         <li>
-                            <a href="#"><i class="icon_chat_alt"></i> Message to client</a>
+                            <a data-toggle="modal" data-target="#chat" ><i class="icon_chat_alt"></i> Message to user</a>
                         </li>
                         <li>
-                            <a href="login.ejs"><i class="icon_key_alt"></i> Settings</a>
+                            <a href="#"><i class="icon_key_alt"></i> Settings</a>
                         </li>
-                        <li>
-                            <a href="documentation.html"><i class="icon_key_alt"></i> Log Out</a>
+                        <li ng-click="Logout()">
+                            <a href="#"><i class="icon_key_alt"></i> Log Out</a>
                         </li>
+
                     </ul>
                 </li>
                 <!-- user login dropdown end -->
@@ -168,216 +136,216 @@
         </div>
     </header>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3 class="page-header" style="border-bottom: 1px solid black"><i class="fa fa-laptop"></i> Dashboard</h3>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header" style="border-bottom: 1px solid black"><i class="fa fa-laptop"></i> Dashboard</h3>
 
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <div class="row">
-
-
-
-                <div class="col-md-3 " style="background-color: white;">
-
-                 <h1 style="margin-left: 1%">Your Community Services</h1>
-                    <div class="col-md-12" ng-repeat="service in Services">
-
-                        <div  class="info-box blue-bg" ng-click="displayService(service.title)">
-                            <i class="fa fa-adjust"></i>
-                            <div class="count">1</div>
-                            <div class="title">{{service.title}}</div>
-                        </div><!--/.info-box-->
-                    </div><!--/.col-->
-                    <div class="col-md-12" data-toggle="modal" data-target="#1">
-
-                            <button type="button" class="btn btn-primary" style="height: 50px; font-size: 150%;margin-bottom: 50px;">Manage Services</button>
-
-                    </div><!--/.col-->
-                </div>
+    <div class="row">
 
 
-                <!--initial dash board for user-->
 
-                <div class="col-md-8" ng-hide="communityDetails" style="background-color:  white;margin-left: 10px;">
+        <div class="col-md-3 " style="background-color: white;">
 
-                    <h1>Welcome to <strong>Villa Torino</strong> Community</h1>
-                    <img src="img/Villa.jpg" style="width: 100%; height: 450px;">
-                    <p>Our central downtown San Jose location, exquisite apartment features, spacious floor plans and luxurious resident amenities are just part of the reason living at Villa Torino is so desirable.
-                        Villa Torino boasts 1, 2, and 3 bedroom floor plans with large living areas perfect for entertaining, generous bedrooms for the perfect at home feel, plush carpeting throughout, and tiled
-                        kitchens and baths. Select units feature separate dining areas, generously sized kitchens with modern appliances and cabinetry. When you step outside your front door, you will be able to
-                        take advantage of various community amenities suited to a relaxing lifestyle. Take a dip in our resort-style pool complete with spa, get in a workout at our fitness center, or just spend some time relaxing in the clubhouse.
-                        Great urban adventures are just a heartbeat from your front door in San Jose and with access to the Light Rail. Meet your friends at San Pedro Square for a drink and dinner or grab some fresh produce to create
-                        your own dinner party at the weekly Farmers Market. Catch a show at the Center for the Performing Arts, cheer for the Sharks at SAP Center, and visit the Tech Museum. If you prefer to stay outdoors, walk or bike at
-                        Guadalupe River Park, a place where you can enjoy northern California’s fantastic scenery.
-                        Your life at Villa Torino is in the center of it all so come find your perfect fit by scheduling a tour today!</p>
+            <h1 style="margin-left: 1%">Your Community Services</h1>
+            <div class="col-md-12" ng-repeat="service in Services">
 
-                </div>
+                <div  class="info-box blue-bg" ng-click="displayService(service.title)">
+                    <i class="fa fa-adjust"></i>
+                    <div class="count">1</div>
+                    <div class="title">{{service.title}}</div>
+                </div><!--/.info-box-->
+            </div><!--/.col-->
+            <div class="col-md-12" data-toggle="modal" data-target="#1">
 
-                <!--end of initial dashboard-->
+                <button type="button" class="btn btn-primary" style="height: 50px; font-size: 150%;margin-bottom: 50px;">Manage Services</button>
+
+            </div><!--/.col-->
+        </div>
 
 
+        <!--initial dash board for user-->
+
+        <div class="col-md-8" ng-hide="communityDetails" style="background-color:  white;margin-left: 10px;">
+
+            <h1>Welcome to <strong>{{communityName}}</strong> Community</h1>
+            <img src="img/Villa.jpg" style="width: 100%; height: 450px;">
+            <p>Our central downtown San Jose location, exquisite apartment features, spacious floor plans and luxurious resident amenities are just part of the reason living at Villa Torino is so desirable.
+                Villa Torino boasts 1, 2, and 3 bedroom floor plans with large living areas perfect for entertaining, generous bedrooms for the perfect at home feel, plush carpeting throughout, and tiled
+                kitchens and baths. Select units feature separate dining areas, generously sized kitchens with modern appliances and cabinetry. When you step outside your front door, you will be able to
+                take advantage of various community amenities suited to a relaxing lifestyle. Take a dip in our resort-style pool complete with spa, get in a workout at our fitness center, or just spend some time relaxing in the clubhouse.
+                Great urban adventures are just a heartbeat from your front door in San Jose and with access to the Light Rail. Meet your friends at San Pedro Square for a drink and dinner or grab some fresh produce to create
+                your own dinner party at the weekly Farmers Market. Catch a show at the Center for the Performing Arts, cheer for the Sharks at SAP Center, and visit the Tech Museum. If you prefer to stay outdoors, walk or bike at
+                Guadalupe River Park, a place where you can enjoy northern California’s fantastic scenery.
+                Your life at Villa Torino is in the center of it all so come find your perfect fit by scheduling a tour today!</p>
+
+        </div>
+
+        <!--end of initial dashboard-->
 
 
 
 
-                <!--start of service specific dash board to be displayed when clicked on service-->
 
 
-                <div class="col-md-5" ng-hide="History" style="background-color:  white;margin-left: 10px;">
-                    <h1>Service History</h1>
+        <!--start of service specific dash board to be displayed when clicked on service-->
 
-                    <div  style="margin:20px;" ng-repeat="post in items">
 
-                        <div id="1" class="col-md-11 feed" style="background:white;margin-bottom:10px;box-shadow:10px 10px 5px #ccc ;border:1px solid #ccc;
+        <div class="col-md-5" ng-hide="History" style="background-color:  white;margin-left: 10px;">
+            <h1>Service History</h1>
+
+            <div  style="margin:20px;" ng-repeat="post in items">
+
+                <div id="1" class="col-md-11 feed" style="background:white;margin-bottom:10px;box-shadow:10px 10px 5px #ccc ;border:1px solid #ccc;
                             padding:25px;" >
+                    <div class="row">
+                        <div class="col-md-3">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="row">
-                                        <img src="./img/Villa.jpg"; style="max-height:100px;max-widht:100px">
-                                    </div>
-                                    <div class="row">
-                                        <p style="padding: 10px;">{{post.suspect}}</p>
-                                        <p style="padding: 10px;">{{post.location}}</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <h1>{{post.title}}</h1>
-                                        <span>{{post.dateandtime}}</span>
-                                    </div>
-                                    <div class="row" style="margin-top: 20px;">
-                                        <div class="col-md-12">
-                                            <p class="description">
-                                                Description :- <br>{{post.description}}
-                                            </p>
-                                            <p>Dateposted :- {{post.dateposted}}</p>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                <img src="./img/Villa.jpg"; style="max-height:100px;max-widht:100px">
+                            </div>
+                            <div class="row">
+                                <p style="padding: 10px;">{{post.suspect}}</p>
+                                <p style="padding: 10px;">{{post.location}}</p>
                             </div>
                         </div>
-                    </div>
-
-                    <div>
-                        <div  class="container">
-                            <div class="text-center">
-
-                                <!-- pager -->
-                                <ul ng-if="pager.pages.length" class="pagination">
-                                    <li ng-class="{disabled:pager.currentPage === 1}">
-                                        <a ng-click="setPage(1)">First</a>
-                                    </li>
-                                    <li ng-class="{disabled:pager.currentPage === 1}">
-                                        <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
-                                    </li>
-                                    <li ng-repeat="page in pager.pages" ng-class="{pager.currentPage === page}">
-                                        <a ng-click="setPage(page)">{{page}}</a>
-                                    </li>
-                                    <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
-                                        <a ng-click="setPage(pager.currentPage + 1)">Next</a>
-                                    </li>
-                                    <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
-                                        <a ng-click="setPage(pager.totalPages)">Last</a>
-                                    </li>
-                                </ul>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <h1>{{post.title}}</h1>
+                                <span>{{post.dateandtime}}</span>
                             </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-12">
+                                    <p class="description">
+                                        Description :- <br>{{post.description}}
+                                    </p>
+                                    <p>Dateposted :- {{post.dateposted}}</p>
+                                </div>
+                            </div>
+
                         </div>
-                        <hr />
                     </div>
-
-
                 </div>
-
-
-                <!--crime service post-->
-
-                <div class="col-md-3" ng-hide="NewCrime" style="background-color: white;height: 700px;margin-left: 10px;padding-left: 50px;">
-                    <h1>Report a new crime </h1>
-                    <form style="width: 80%;margin-top: 30px;">
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" type="text" ng-model="title" id="tit" placeholder = "Crime Title..." required>
-                        </div>
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="desc" type="text" ng-model="description" placeholder = "Crime Description..." required>
-                        </div>
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="loc" type="text" ng-model="suspect" placeholder = "Suspect..." required>
-                        </div>
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="contact" type="text" ng-model="dateandtime" placeholder = "dateandtime..." required>
-                        </div>
-
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="url" type="text" ng-model="severity" placeholder = "severity( High, Medium , Low)...." required>
-                        </div>
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="posted" type="text" ng-model="location" placeholder = "location...." required>
-                        </div>
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="dept" type="text" ng-model="dateposted" placeholder = "dateposted..." required>
-                        </div>
-                        <div class="form-group row buttons">
-                            <button type="button" class="col-sm-5 btn btn-primary" ng-click="jobPost('crimes')">Submit</button>
-                            <label class="col-sm-2 col-form-label"></label>
-
-                            <button type="reset" class=" col-sm-5 btn btn-danger">Reset</button>
-                        </div>
-                    </form>
-                </div>
-
-
-                <!--Event service post-->
-
-                <div class="col-md-3" ng-hide="NewEvent" style="background-color: white;height: 700px;margin-left: 10px;padding-left: 50px;">
-                    <h1>Create a Event </h1>
-                    <form style="width: 80%;margin-top: 30px;">
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" type="text" ng-model="title" id="tit" placeholder = "Event Title..." required>
-                        </div>
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="desc" type="text" ng-model="description" placeholder = "Event Description..." required>
-                        </div>
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="contact" type="text" ng-model="location" placeholder = "Event Location..." required>
-                        </div>
-
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="url" type="text" ng-model="website" placeholder = "website..." required>
-                        </div>
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="dept" type="text" ng-model="date" placeholder = "date..." required>
-                        </div>
-
-                        <div class="row form-group">
-                            <input class="form-control no-border" id="rate" type="text" ng-model="entryfees" placeholder = "entryfees....." required>
-                        </div>
-
-                        <div class="form-group row buttons">
-                            <button type="button" class="col-sm-5 btn btn-primary" ng-click="jobPost('events')">Submit</button>
-                            <label class="col-sm-2 col-form-label"></label>
-
-                            <button type="reset" class=" col-sm-5 btn btn-danger">Reset</button>
-                        </div>
-                    </form>
-                </div>
-
-
             </div>
+
+            <div>
+                <div  class="container">
+                    <div class="text-center">
+
+                        <!-- pager -->
+                        <ul ng-if="pager.pages.length" class="pagination">
+                            <li ng-class="{disabled:pager.currentPage === 1}">
+                                <a ng-click="setPage(1)">First</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === 1}">
+                                <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+                            </li>
+                            <li ng-repeat="page in pager.pages" ng-class="{pager.currentPage === page}">
+                                <a ng-click="setPage(page)">{{page}}</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                <a ng-click="setPage(pager.totalPages)">Last</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr />
+            </div>
+
+
+        </div>
+
+
+        <!--crime service post-->
+
+        <div class="col-md-3" ng-hide="NewCrime" style="background-color: white;height: 700px;margin-left: 10px;padding-left: 50px;">
+            <h1>Report a new crime </h1>
+            <form style="width: 80%;margin-top: 30px;">
+
+                <div class="row form-group">
+                    <input class="form-control no-border" type="text" ng-model="title" id="tit" placeholder = "Crime Title..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="desc" type="text" ng-model="description" placeholder = "Crime Description..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="loc" type="text" ng-model="suspect" placeholder = "Suspect..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="contact" type="text" ng-model="dateandtime" placeholder = "dateandtime..." required>
+                </div>
+
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="url" type="text" ng-model="severity" placeholder = "severity( High, Medium , Low)...." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="posted" type="text" ng-model="location" placeholder = "location...." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="dept" type="text" ng-model="dateposted" placeholder = "dateposted..." required>
+                </div>
+                <div class="form-group row buttons">
+                    <button type="button" class="col-sm-5 btn btn-primary" ng-click="jobPost('crimes')">Submit</button>
+                    <label class="col-sm-2 col-form-label"></label>
+
+                    <button type="reset" class=" col-sm-5 btn btn-danger">Reset</button>
+                </div>
+            </form>
+        </div>
+
+
+        <!--Event service post-->
+
+        <div class="col-md-3" ng-hide="NewEvent" style="background-color: white;height: 700px;margin-left: 10px;padding-left: 50px;">
+            <h1>Create a Event </h1>
+            <form style="width: 80%;margin-top: 30px;">
+
+                <div class="row form-group">
+                    <input class="form-control no-border" type="text" ng-model="title" id="tit" placeholder = "Event Title..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="desc" type="text" ng-model="description" placeholder = "Event Description..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="contact" type="text" ng-model="location" placeholder = "Event Location..." required>
+                </div>
+
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="url" type="text" ng-model="website" placeholder = "website..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="dept" type="text" ng-model="date" placeholder = "date..." required>
+                </div>
+
+                <div class="row form-group">
+                    <input class="form-control no-border" id="rate" type="text" ng-model="entryfees" placeholder = "entryfees....." required>
+                </div>
+
+                <div class="form-group row buttons">
+                    <button type="button" class="col-sm-5 btn btn-primary" ng-click="jobPost('events')">Submit</button>
+                    <label class="col-sm-2 col-form-label"></label>
+
+                    <button type="reset" class=" col-sm-5 btn btn-danger">Reset</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
 
 
 
@@ -393,28 +361,59 @@
                     <h4 class="modal-title" >Add Smart Node</h4>
                 </div>
 
-                    <div class="row" ng-repeat="service in Services" >
-                        <div class="modal-body col-md-6" style="margin-left: 20px;">
-                            <p>{{service.title}}</p>
-                        </div>
-                        <div class="modal-body col-md-2" >
-                            <button type="button" class="btn btn-danger" ng-hide="true" data-dismiss="modal" >Subscribe</button>
-                        </div>
-                        <div class="modal-body col-md-1" >
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Unsubscribe</button>
-                        </div>
+                <div class="row" ng-repeat="service in Services" >
+                    <div class="modal-body col-md-6" style="margin-left: 20px;">
+                        <p>{{service.title}}</p>
                     </div>
+                    <div class="modal-body col-md-2" >
+                        <button type="button" class="btn btn-danger" ng-hide="true" data-dismiss="modal" >Subscribe</button>
+                    </div>
+                    <div class="modal-body col-md-1" >
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Unsubscribe</button>
+                    </div>
+                </div>
 
+            </div>
+
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+    <!--MODAL CONTENT for chat to other user-->
+
+    <div class="modal fade" id="chat" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >Talk to you community people</h4>
+                </div>
+                <div class="modal-body row" style="margin-left: 10px;">
+                    Select User :- <select>
+                        <option value="volvo">User 1</option>
+                        <option value="saab">User 2</option>
+                        <option value="mercedes">User 3</option>
+                        <option value="audi">User 4</option>
+                    </select>
+                </div>
+                <div class="modal-body row" style="margin-left: 10px;">
+                    <textarea rows="4" cols="50" placeholder="Type your message here.."></textarea>
+                </div>
+                <div class=" modal-body row"  style="margin-left: 10px;">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Send</button>
                 </div>
 
 
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
+            </div>
+
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 
 
 
 
-<!--end of modal-->
+    <!--end of modal-->
 
     <!-- javascripts -->
     <script src="js/jquery.js"></script>

@@ -1,171 +1,191 @@
-/**
- * Created by vedant on 5/13/17.
- */
 angular.module("myApp", [])
     .factory('PagerService', PagerService)
     .controller("ClientCtrl", function($scope,$http,$window,PagerService) {
 
 
-    var useremailid=sessionStorage.getItem("email");
-
-
-
-    $http({
-        method: "GET",
-        url: '/v1/communities/'+JSON.parse(sessionStorage.getItem("community"))._id,
-        data: {}
-    }).success(function (data) {
-
-        $scope.Services = data.services;
-
-    }).error(function (error) {
-
-        $scope.unexpected_error = false;
-        $scope.invalid_login = true;
-        // $window.alert("unexpected_error");
-    });
-
-
-
-
-
-    $scope.addtocommunity=function() {
+        var useremailid=sessionStorage.getItem("email");
 
         $http({
-            method : "POST",
-            url : '/v1/users',
-            data : {
-                username:$scope.username,
-                user_emailid:$scope.user_email,
-            }
-        }).success(function(data) {
+            method: "GET",
+            url: '/v1/announcements',
+            data: {}
+        }).success(function (data) {
 
+            $scope.announcements = data;
+            $scope.length=data.length;
 
-            swal({
-                title: 'Are you sure you want to post?',
-                text: "You won,t  be able to revert you job post!",
-                type: 'success',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, post it!'
-            }).then(function () {
-                swal(
-                    'Posted!',
-                    'Your post has been posted.',
-                    'success'
-                )
-                window.location.assign("/profilefeed");
-            })
-
-
-        }).error(function(error) {
-            console.log("inside error");
-            console.log(error);
-            $scope.unexpected_error = false;
-            $scope.invalid_login = true;
-            // $window.alert("unexpected_error");
-        });
-
-    }
-
-
-    $scope.NewCrime = true;
-    $scope.NewEvent=true;
-    $scope.History = true;
-    $scope.communityDetails=false;
-    $scope.displayService= function(service){
-
-        getServiceHistory(service);
-
-                if(service=="crime service") {
-                    $scope.NewEvent = true;
-                    $scope.NewCrime = false;
-                    $scope.History = false;
-                    $scope.communityDetails=true;
-                    return;
-
-                }
-               else if(service=="event service") {
-                    $scope.NewCrime = true;
-                    $scope.NewEvent = false;
-                    $scope.History = false;
-                    $scope.communityDetails=true;
-                    return;
-
-                }
-
-                else if(service=="parking service") {
-
-                }
-                else if(service=="weather service") {
-
-                }
-
-
-    }
-
-
-    function getServiceHistory(service){
-        var serviceName;
-        if(service==="crime service") {
-            serviceName="crimes";
-        }
-
-        else if(service==="event service") {
-            serviceName="events";
-        }
-
-
-
-
-        $http({
-            method : "GET",
-            url : '/v1/'+serviceName,
-            data :{}
-
-        }).success(function(data) {
-
-            // console.log(data);
-            $scope.serviceHistory=data;
-            $scope.post = data;
-            $scope.dummyItems = data
-            $scope.pager = {};
-            $scope.setPage = setPage;
-
-            initController();
-
-            function initController() {
-                // initialize to page 1
-                $scope.setPage(1);
-            }
-
-            function setPage(page) {
-                if (page < 1 || page > $scope.pager.totalPages) {
-                    return;
-                }
-
-                // get pager object from service
-                $scope.pager = PagerService.GetPager($scope.dummyItems.length, page);
-
-                // get current page of items
-                $scope.items =$scope.dummyItems.slice($scope.pager.startIndex, $scope.pager.endIndex + 1);
-            }
-
-
-        }).error(function(error) {
+        }).error(function (error) {
 
             $scope.unexpected_error = false;
             $scope.invalid_login = true;
             // $window.alert("unexpected_error");
         });
 
-    }
+
+
+        // var communityDescription={"Villa"}
+
+
+        console.log(JSON.parse(sessionStorage.getItem("community"))._id);
+
+        $http({
+            method: "GET",
+            url: '/v1/communities/'+JSON.parse(sessionStorage.getItem("community"))._id,
+            data: {}
+        }).success(function (data) {
+
+            $scope.communityName=data.name;
+            // $scope.communityDescription=communityDescription.communityName;
+            $scope.Services = data.services;
+
+        }).error(function (error) {
+
+            $scope.unexpected_error = false;
+            $scope.invalid_login = true;
+            // $window.alert("unexpected_error");
+        });
 
 
 
-    $scope.jobPost=function(service) {
-        var serviceValue;
+
+
+        $scope.addtocommunity=function() {
+
+            $http({
+                method : "POST",
+                url : '/v1/users',
+                data : {
+                    username:$scope.username,
+                    user_emailid:$scope.user_email,
+                }
+            }).success(function(data) {
+
+
+                swal({
+                    title: 'Are you sure you want to post?',
+                    text: "You won,t  be able to revert you job post!",
+                    type: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, post it!'
+                }).then(function () {
+                    swal(
+                        'Posted!',
+                        'Your post has been posted.',
+                        'success'
+                    )
+                    window.location.assign("/profilefeed");
+                })
+
+
+            }).error(function(error) {
+                console.log("inside error");
+                console.log(error);
+                $scope.unexpected_error = false;
+                $scope.invalid_login = true;
+                // $window.alert("unexpected_error");
+            });
+
+        }
+
+
+        $scope.NewCrime = true;
+        $scope.NewEvent=true;
+        $scope.History = true;
+        $scope.communityDetails=false;
+        $scope.displayService= function(service){
+
+            getServiceHistory(service);
+
+            if(service=="crime service") {
+                $scope.NewEvent = true;
+                $scope.NewCrime = false;
+                $scope.History = false;
+                $scope.communityDetails=true;
+                return;
+
+            }
+            else if(service=="event service") {
+                $scope.NewCrime = true;
+                $scope.NewEvent = false;
+                $scope.History = false;
+                $scope.communityDetails=true;
+                return;
+
+            }
+
+            else if(service=="parking service") {
+
+            }
+            else if(service=="weather service") {
+
+            }
+
+
+        }
+
+
+        function getServiceHistory(service){
+            var serviceName;
+            if(service==="crime service") {
+                serviceName="crimes";
+            }
+
+            else if(service==="event service") {
+                serviceName="events";
+            }
+
+
+
+
+            $http({
+                method : "GET",
+                url : '/v1/'+serviceName,
+                data :{}
+
+            }).success(function(data) {
+
+                // console.log(data);
+                $scope.serviceHistory=data;
+                $scope.post = data;
+                $scope.dummyItems = data
+                $scope.pager = {};
+                $scope.setPage = setPage;
+
+                initController();
+
+                function initController() {
+                    // initialize to page 1
+                    $scope.setPage(1);
+                }
+
+                function setPage(page) {
+                    if (page < 1 || page > $scope.pager.totalPages) {
+                        return;
+                    }
+
+                    // get pager object from service
+                    $scope.pager = PagerService.GetPager($scope.dummyItems.length, page);
+
+                    // get current page of items
+                    $scope.items =$scope.dummyItems.slice($scope.pager.startIndex, $scope.pager.endIndex + 1);
+                }
+
+
+            }).error(function(error) {
+
+                $scope.unexpected_error = false;
+                $scope.invalid_login = true;
+                // $window.alert("unexpected_error");
+            });
+
+        }
+
+
+
+        $scope.jobPost=function(service) {
+            var serviceValue;
 
 
             if(service==="crimes") {
@@ -191,44 +211,52 @@ angular.module("myApp", [])
                 };
             }
 
-        $http({
-            method : "POST",
-            url : '/v1/'+service,
-            data :serviceValue
+            $http({
+                method : "POST",
+                url : '/v1/'+service,
+                data :serviceValue
 
-        }).success(function(data) {
+            }).success(function(data) {
 
-            swal({
-                title: 'Are you sure you want to post?',
-                text: "You won,t  be able to revert !",
-                type: 'success',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, post it!'
-            }).then(function () {
-                swal(
-                    'Posted!',
-                    'Thank You.',
-                    'success'
-                )
-                // window.location.assign("/profilefeed");
-            })
-
-
-        }).error(function(error) {
-
-            $scope.unexpected_error = false;
-            $scope.invalid_login = true;
-            // $window.alert("unexpected_error");
-        });
+                swal({
+                    title: 'Are you sure you want to post?',
+                    text: "You won,t  be able to revert !",
+                    type: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, post it!'
+                }).then(function () {
+                    swal(
+                        'Posted!',
+                        'Thank You.',
+                        'success'
+                    )
+                    // window.location.assign("/profilefeed");
+                })
 
 
-    }
+            }).error(function(error) {
+
+                $scope.unexpected_error = false;
+                $scope.invalid_login = true;
+                // $window.alert("unexpected_error");
+            });
+
+
+        }
+
+
+        $scope.Logout =function () {
+
+            sessionStorage.clear('community');
+            window.location.assign("/");
+
+        };
 
 
 
-});
+    });
 
 
 

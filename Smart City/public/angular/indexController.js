@@ -25,7 +25,33 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
     }
 
     $scope.login=function() {
-        window.location.assign("/login");
+
+        var email=$scope.user;
+
+
+        $http({
+            method: "GET",
+            url: '/v1/users/'+email,
+            data: {}
+        }).success(function (data) {
+
+
+
+            console.log(data);
+            console.log(data[0].community);
+            sessionStorage.setItem("community",JSON.stringify(data[0].community));
+            window.location.assign("/login");
+
+        }).error(function (error) {
+
+            $scope.unexpected_error = false;
+            $scope.invalid_login = true;
+            $window.alert("Login Failed");
+            window.location.assign("/");
+
+        });
+
+
     }
     $scope.signup=function() {
         window.location.assign("/signup");
@@ -53,32 +79,33 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
 
             $scope.unexpected_error = false;
             $scope.invalid_login = true;
-            // $window.alert("unexpected_error");
+            window.location.assign("/signup");
         });
 
     }
 
     $scope.getConnected=function() {
 
-        $scope.community=$scope.coomunityName;
+        $scope.community=$scope.communityName;
+
         for(var i=0;i<$scope.communities.length;i++)
         {
             if($scope.communities[i].name===$scope.community)
                 $scope.Usercommunity=$scope.communities[i];
         }
 
-        console.log( $scope.Usercommunity);
+        // console.log( $scope.Usercommunity);
 
         sessionStorage.setItem("community",JSON.stringify($scope.Usercommunity));
 
-        console.log(JSON.parse(sessionStorage.getItem("community")));
+        // console.log(JSON.parse(sessionStorage.getItem("community")));
 
 
         $http({
             method : "PUT",
             url : '/v1/users/'+sessionStorage.getItem("email"),
             data : {
-                name: $scope.Usercommunity
+                community: $scope.Usercommunity
             }
         }).success(function(data) {
 
