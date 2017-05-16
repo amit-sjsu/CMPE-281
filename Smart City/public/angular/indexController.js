@@ -45,6 +45,7 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
 
             console.log(data);   console.log(data[0].community);
             sessionStorage.setItem("user",JSON.stringify(data[0]));
+            sessionStorage.setItem("UserName",data[0].name);
             sessionStorage.setItem("community",JSON.stringify(data[0].community));
             window.location.assign("/login");
 

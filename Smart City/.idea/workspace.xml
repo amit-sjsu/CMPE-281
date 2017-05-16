@@ -21,22 +21,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="indexController.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="indexController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/angular/indexController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="68" column="53" lean-forward="false" selection-start-line="68" selection-start-column="53" selection-end-line="68" selection-end-column="53" />
+            <state relative-caret-position="549">
+              <caret line="54" column="40" lean-forward="true" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
               <folding>
-                <marker date="1494961814000" expanded="true" signature="14227:14241" ph="..." />
-                <marker date="1494961814000" expanded="true" signature="14313:14332" ph="..." />
-                <marker date="1494961814000" expanded="true" signature="16303:16317" ph="..." />
-                <marker date="1494961814000" expanded="true" signature="16389:16408" ph="..." />
+                <marker date="1494962822000" expanded="true" signature="14288:14302" ph="..." />
+                <marker date="1494962822000" expanded="true" signature="14374:14393" ph="..." />
+                <marker date="1494962822000" expanded="true" signature="16364:16378" ph="..." />
+                <marker date="1494962822000" expanded="true" signature="16450:16469" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientIndex.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClientIndex.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/ClientIndex.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="361">
@@ -49,8 +49,8 @@
       <file leaf-file-name="ClientController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/angular/ClientController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="24" />
+            <state relative-caret-position="150">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -144,8 +144,8 @@
         <option value="$PROJECT_DIR$/views/ConnectCluster.ejs" />
         <option value="$PROJECT_DIR$/views/analytics.ejs" />
         <option value="$PROJECT_DIR$/public/angular/ClientController.js" />
-        <option value="$PROJECT_DIR$/public/angular/indexController.js" />
         <option value="$PROJECT_DIR$/views/ClientIndex.ejs" />
+        <option value="$PROJECT_DIR$/public/angular/indexController.js" />
       </list>
     </option>
   </component>
@@ -458,12 +458,12 @@
       <workItem from="1494820646608" duration="2150000" />
       <workItem from="1494841647104" duration="10666000" />
       <workItem from="1494896641379" duration="7657000" />
-      <workItem from="1494961050030" duration="829000" />
+      <workItem from="1494961050030" duration="1351000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="127349000" />
+    <option name="totallyTimeSpent" value="127871000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -784,32 +784,32 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/ClientIndex.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/angular/ClientController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="24" />
+        <state relative-caret-position="150">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/angular/indexController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="68" column="53" lean-forward="false" selection-start-line="68" selection-start-column="53" selection-end-line="68" selection-end-column="53" />
+        <state relative-caret-position="549">
+          <caret line="54" column="40" lean-forward="true" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
           <folding>
-            <marker date="1494961814000" expanded="true" signature="14227:14241" ph="..." />
-            <marker date="1494961814000" expanded="true" signature="14313:14332" ph="..." />
-            <marker date="1494961814000" expanded="true" signature="16303:16317" ph="..." />
-            <marker date="1494961814000" expanded="true" signature="16389:16408" ph="..." />
+            <marker date="1494962822000" expanded="true" signature="14288:14302" ph="..." />
+            <marker date="1494962822000" expanded="true" signature="14374:14393" ph="..." />
+            <marker date="1494962822000" expanded="true" signature="16364:16378" ph="..." />
+            <marker date="1494962822000" expanded="true" signature="16450:16469" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/ClientIndex.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
