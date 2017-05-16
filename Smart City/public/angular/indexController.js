@@ -37,8 +37,9 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
 
 
 
-            console.log(data);
-            console.log(data[0].community);
+
+            console.log(data);   console.log(data[0].community);
+            sessionStorage.setItem("user",JSON.stringify(data[0]));
             sessionStorage.setItem("community",JSON.stringify(data[0].community));
             window.location.assign("/login");
 
@@ -105,10 +106,12 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
             method : "PUT",
             url : '/v1/users/'+sessionStorage.getItem("email"),
             data : {
-                community: $scope.Usercommunity
+                community: $scope.Usercommunity,
+                servivces:$scope.Usercommunity.services
             }
         }).success(function(data) {
-
+            console.log("users====="+data)
+            sessionStorage.setItem("user",JSON.stringify(data));
             window.location.assign("/ClientDashboard");
 
 
@@ -167,7 +170,7 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
                 "address":$scope.clusterAddress,
                 "url":$scope.clusterUrl,
                 "communityRepresentative":$scope.communityRepresentative,
-                "servivces": $scope.services
+                "services": $scope.services
                 //services to be included here
             }
         }).success(function(data) {

@@ -5,6 +5,8 @@ angular.module("myApp", [])
 
         var useremailid=sessionStorage.getItem("email");
 
+
+
         $http({
             method: "GET",
             url: '/v1/announcements',
@@ -253,6 +255,57 @@ angular.module("myApp", [])
             window.location.assign("/");
 
         };
+
+
+
+        //Subscrip and unsubscribe from a services
+
+        // $scope.Subscribe=true;
+        // $scope.Unsubscribe=false;
+        //
+        var temp;
+        $scope.unsubscribe = function (serviceName) {
+
+            temp = JSON.parse(sessionStorage.getItem("user"));
+            console.log(temp);
+            for(var i =0;i<temp.servivces.length;i++)
+            {
+                if(temp.servivces[i].title===serviceName){
+
+                    // user.servivces.remove(user.servivces[i]);
+                    temp.servivces.splice(i,1);
+
+                    break;
+                }
+
+
+            }
+            console.log(temp);
+
+            $http({
+                method: "PUT",
+                url: '/v1/users/'+useremailid,
+                data:temp
+            }).success(function (data) {
+
+            }).error(function (error) {
+
+                $scope.unexpected_error = false;
+                $scope.invalid_login = true;
+                // $window.alert("unexpected_error");
+            });
+
+
+
+
+        };
+
+
+
+
+
+
+
 
 
 
