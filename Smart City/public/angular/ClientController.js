@@ -4,6 +4,8 @@ angular.module("myApp", [])
 
 
         var useremailid=sessionStorage.getItem("email");
+        var UserName=sessionStorage.getItem("UserName");
+        $scope.UserValue=UserName;
 
 
 

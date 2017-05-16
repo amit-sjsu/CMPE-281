@@ -4,6 +4,11 @@
 var myApp=angular.module("myApp", []);
 myApp.controller("AppCtrl", function($scope,$http,$window) {
 
+
+
+
+
+
     $http({
         method: "GET",
         url: '/v1/communities',
@@ -61,6 +66,7 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
     $scope.ConnectCluster=function() {
 
         sessionStorage.setItem("email",$scope.email);
+        sessionStorage.setItem("UserName",$scope.name);
 
         $http({
             method : "POST",
