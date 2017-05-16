@@ -504,12 +504,12 @@ app.put('/v1/crimes/:crimeid', jsonParser, function(req, res){
 // get all events
 app.get('/v1/events', function(req, res){
 
-    console.log("I am in event api");
+    console.log("I am in event api for GET");
     console.log(req.body);
 
     Event.find({}, function(err, events){
         if(err) res.status(500).send('{ "message" : "Unable to fetch events"}');
-        res.status(200).json(events);
+        res.status(200).json(events.reverse());
     });
 });
 
@@ -526,7 +526,8 @@ app.get('/v1/events/:eventId', function(req, res){
 
 // create new event
 app.post('/v1/events', jsonParser, function(req, res){
-    console.log("I am in event api");
+
+    console.log("I am in event api for now");
     console.log(req.body);
 
     var e = Event(req.body);

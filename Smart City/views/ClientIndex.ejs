@@ -70,7 +70,7 @@
         </div>
 
         <!--logo start-->
-        <a href="index.html" class="logo">Welcome <span class="lite">{{UserValue}}</span></a>
+        <a href="#" class="logo">Welcome <span class="lite">{{UserValue}}</span></a>
         <!--logo end-->
 
         <div class="nav search-row" id="top_menu">
@@ -170,12 +170,40 @@
                     <div class="title">{{service.title}}</div>
                 </div><!--/.info-box-->
             </div><!--/.col-->
-            <div class="col-md-12" data-toggle="modal" data-target="#1">
+            <div class="col-md-12" >
 
-                <button type="button" class="btn btn-primary" style="height: 50px; font-size: 150%;margin-bottom: 50px;">Manage Services</button>
+                <button type="button" ng-click="manageServices()" class="btn btn-primary" style="height: 50px; font-size: 150%;margin-bottom: 50px;">Manage Services</button>
 
             </div><!--/.col-->
         </div>
+
+
+        <div class="col-md-8" ng-hide="ManageServices" style="margin-left: 10px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >Manage Services</h4>
+                </div>
+
+                <div class="row" ng-repeat="service in Services" >
+                    <div class="modal-body col-md-6" style="margin-left: 20px;">
+                        <p>{{service.title}}</p>
+                    </div>
+                    <!--<div class="modal-body col-md-2" >-->
+                    <!--<button  type="button" class="btn btn-danger" ng-click="subscribe(service.title)" ng-hide="Subscribe" data-dismiss="modal" >Subscribe</button>-->
+                    <!--</div>-->
+                    <div class="modal-body col-md-1" >
+                        <button type="button" class="btn btn-danger" ng-click="unsubscribe(service.title)" ng-hide="Unsubscribe"  data-dismiss="modal">Unsubscribe</button>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <button type="button"  style="margin: 50px;" class="btn btn-danger" ng-click="backToDashBoard()" >Back to dashboard</button>
+                </div>
+
+            </div>
+        </div>
+
 
 
         <!--initial dash board for user-->
@@ -265,8 +293,12 @@
                         </ul>
                     </div>
                 </div>
-                <hr />
+
             </div>
+
+
+                <button type="button" class="btn btn-danger" ng-click="backToDashBoard()" >Back to dashboard</button>
+
 
 
         </div>
@@ -365,31 +397,31 @@
 
     <!--MODAL CONTENT-->
 
-    <div class="modal fade" id="1" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" >Manage Services</h4>
-                </div>
+    <!--<div class="modal fade" id="1" tabindex="-1" role="dialog">-->
+        <!--<div class="modal-dialog" role="document">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                    <!--<h4 class="modal-title" >Manage Services</h4>-->
+                <!--</div>-->
 
-                <div class="row" ng-repeat="service in Services" >
-                    <div class="modal-body col-md-6" style="margin-left: 20px;">
-                        <p>{{service.title}}</p>
-                    </div>
-                    <!--<div class="modal-body col-md-2" >-->
-                        <!--<button  type="button" class="btn btn-danger" ng-click="subscribe(service.title)" ng-hide="Subscribe" data-dismiss="modal" >Subscribe</button>-->
+                <!--<div class="row" ng-repeat="service in Services" >-->
+                    <!--<div class="modal-body col-md-6" style="margin-left: 20px;">-->
+                        <!--<p>{{service.title}}</p>-->
                     <!--</div>-->
-                    <div class="modal-body col-md-1" >
-                        <button type="button" class="btn btn-danger" ng-click="unsubscribe(service.title)" ng-hide="Unsubscribe"  data-dismiss="modal">Unsubscribe</button>
-                    </div>
-                </div>
+                    <!--&lt;!&ndash;<div class="modal-body col-md-2" >&ndash;&gt;-->
+                        <!--&lt;!&ndash;<button  type="button" class="btn btn-danger" ng-click="subscribe(service.title)" ng-hide="Subscribe" data-dismiss="modal" >Subscribe</button>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--<div class="modal-body col-md-1" >-->
+                        <!--<button type="button" class="btn btn-danger" ng-click="unsubscribe(service.title)" ng-hide="Unsubscribe"  data-dismiss="modal">Unsubscribe</button>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-            </div>
+            <!--</div>-->
 
 
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
 
     <!--MODAL CONTENT for chat to other user-->
 

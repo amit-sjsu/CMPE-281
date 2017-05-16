@@ -141,11 +141,14 @@ angular.module("myApp", [])
         $scope.NewEvent=true;
         $scope.History = true;
         $scope.communityDetails=false;
+        $scope.ManageServices=true;
+
         $scope.displayService= function(service){
 
             getServiceHistory(service);
 
             if(service=="crime service") {
+                $scope.ManageServices=true;
                 $scope.NewEvent = true;
                 $scope.NewCrime = false;
                 $scope.History = false;
@@ -154,6 +157,7 @@ angular.module("myApp", [])
 
             }
             else if(service=="event service") {
+                $scope.ManageServices=true;
                 $scope.NewCrime = true;
                 $scope.NewEvent = false;
                 $scope.History = false;
@@ -169,6 +173,26 @@ angular.module("myApp", [])
 
             }
 
+
+        }
+
+        $scope.manageServices= function () {
+
+            $scope.NewCrime = true;
+            $scope.NewEvent=true;
+            $scope.History = true;
+            $scope.communityDetails=true;
+            $scope.ManageServices=false;
+
+        }
+
+        $scope.backToDashBoard =function () {
+
+            $scope.NewCrime = true;
+            $scope.NewEvent=true;
+            $scope.History = true;
+            $scope.communityDetails=false;
+            $scope.ManageServices=true;
 
         }
 
