@@ -370,14 +370,13 @@
                 <li class="sub-menu">
                     <a href="javascript:;" class="">
                         <i class="icon_desktop"></i>
-                        <span>Message Link</span>
-                        <span class="menu-arrow arrow_carrot-right"></span>
+                        <span  data-toggle="modal" data-target="#BroadcastModal">Broadcast Message</span>
                     </a>
-                    <ul class="sub">
-                        <li><a class="" href="form_component.html">Add Message Link</a></li>
-                        <li><a class="" href="form_validation.html">Delete Message Link</a></li>
-                        <li><a class="" href="form_validation.html">Update Message Link</a></li>
-                    </ul>
+                    <!--<ul class="sub">-->
+                        <!--<li><a class="" href="form_component.html">Add Message Link</a></li>-->
+                        <!--<li><a class="" href="form_validation.html">Delete Message Link</a></li>-->
+                        <!--<li><a class="" href="form_validation.html">Update Message Link</a></li>-->
+                    <!--</ul>-->
                 </li>
 
 
@@ -421,7 +420,7 @@
                                 <ul class="nav nav-tabs" id="chartist-tab">
                                     <li><a href="#tab-revenues" data-toggle="tab"><i
                                                     class="fa fa-bar-chart-o visible-xs"></i>
-                                            <span class="hidden-xs">First 10 Cities with their revenue</span></a>
+                                            <span class="" style="color:black"><b>Number of Users per Cluster</b></span></a>
                                     </li>
                                 </ul>
                             </h2>
@@ -430,6 +429,33 @@
                             <div class="tab-content">
                                 <div id="tab-revenues" class="tab-pane active">
                                     <div id="container1"
+                                         style="min-width: 600px; height: 500px; margin: 0 auto"></div>
+                                    <!--<nvd3 options="options" data="data"></nvd3>-->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default demo-dashboard-graph" data-widget=''>
+                        <div class="panel-heading">
+                            <h2>
+                                <ul class="nav nav-tabs" id="chartist-tab">
+                                    <li><a href="#tab-revenues" data-toggle="tab"><i
+                                                    class="fa fa-bar-chart-o visible-xs"></i>
+                                            <span class="" style="color:black"><b>Number of Users per Service</b></span></a>
+                                    </li>
+                                </ul>
+                            </h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div id="tab-revenues" class="tab-pane active">
+                                    <div id="container2"
                                          style="min-width: 600px; height: 500px; margin: 0 auto"></div>
                                     <!--<nvd3 options="options" data="data"></nvd3>-->
 
@@ -1096,6 +1122,27 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-success" ng-click="addService()" data-dismiss="modal">Submit</button>
+
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+
+
+                <div class="modal fade" id="BroadcastModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Broadcast Message</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Description &nbsp; :&nbsp; &nbsp;  <textarea ng-model="message" name="message" rows="10" cols="30"></textarea></p>
+                                <!--<p>Current Date & Time &nbsp; :&nbsp; &nbsp; {{Date.now() | }} </p>-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-success" ng-click="postannouncement()" data-dismiss="modal">Submit</button>
 
                             </div>
                         </div><!-- /.modal-content -->

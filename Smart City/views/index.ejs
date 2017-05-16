@@ -365,14 +365,14 @@
         <li class="sub-menu">
           <a href="javascript:;" class="">
             <i class="icon_desktop"></i>
-            <span>Message Link</span>
-            <span class="menu-arrow arrow_carrot-right"></span>
+              <span  data-toggle="modal" data-target="#BroadcastModal">Broadcast Message</span>
+
           </a>
-          <ul class="sub">
-            <li><a class="" href="form_component.html">Add Message Link</a></li>
-            <li><a class="" href="form_validation.html">Delete Message Link</a></li>
-            <li><a class="" href="form_validation.html">Update Message Link</a></li>
-          </ul>
+          <!--<ul class="sub">-->
+            <!--<li><a class="" href="form_component.html">Add Message Link</a></li>-->
+            <!--<li><a class="" href="form_validation.html">Delete Message Link</a></li>-->
+            <!--<li><a class="" href="form_validation.html">Update Message Link</a></li>-->
+          <!--</ul>-->
         </li>
 
 
@@ -1070,7 +1070,7 @@
                                   <option value="yugal">Yugal</option></select></p>
 
                           <p>Services &nbsp; : &nbsp;
-                          <div ng-repeat="oneservice in allservice"> <input type="checkbox" ng-model="services" value="{{oneservice._id}}">&nbsp;{{oneservice.title}}<br></div>
+                          <div ng-repeat="oneservice in allservice"> <input type="checkbox" ng-model="services">&nbsp;{{oneservice.title}}<br></div>
                           </p>
                           <!--<div><br> <input type="checkbox" name="selectedservice[]" value="{{service}}" ng-checked="selectedservices.indexof(service)>-1" ng-click="selectservices(service)" >{{service}}</div> </p>-->
 
@@ -1184,6 +1184,27 @@
                       </div>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                      </div>
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+          </div>
+
+
+          <div class="modal fade" id="BroadcastModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Broadcast Message</h4>
+                      </div>
+                      <div class="modal-body">
+                          <p>Description &nbsp; :&nbsp; &nbsp;  <textarea ng-model="message" name="message" rows="10" cols="30"></textarea></p>
+                          <!--<p>Current Date & Time &nbsp; :&nbsp; &nbsp; {{Date.now() | }} </p>-->
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-success" ng-click="postannouncement()" data-dismiss="modal">Submit</button>
 
                       </div>
                   </div><!-- /.modal-content -->

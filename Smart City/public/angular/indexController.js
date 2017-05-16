@@ -94,8 +94,43 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
 
     }
 
+    $scope.services = [{
+        "_id": "5917d621ef2f6a561acb66f1",
+        "title": "Disaster",
+        "description": "Baarish aai to bataunga",
+        "status": true,
+        "url": "sdfsjfn",
+        "servicesprovided": "sdjflnsdf",
+        "__v": 0
+    }, {
+        "_id": "5917eb1845ed185ac111ead2",
+        "title": "Crime Service",
+        "description": "Crime Service",
+        "status": true,
+        "url": "crime.org",
+        "servicesprovided": "Crime service",
+        "__v": 0
+    },   {
+        "_id": "59192c76723b2d610c89fbaf",
+        "title": "Weather Report",
+        "description": "Tells you the weather in your area",
+        "status": true,
+        "url": "weather.com",
+        "servicesprovided": "Weather Forcasts",
+        "__v": 0
+    },
+        {
+            "_id": "591a0fe239e441658e7f6209",
+            "title": "Weather reporting",
+            "description": "Weather reporting",
+            "status": true,
+            "url": "Weather reporting",
+            "servicesprovided": "Weather reporting",
+            "__v": 0
+        }];
 
     $scope.addCluster = function() {
+
         console.log("Adding new cluster"+$scope.services);
         $http({
             method:'post',
@@ -105,7 +140,7 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
                 "address":$scope.clusterAddress,
                 "url":$scope.clusterUrl,
                 "communityRepresentative":$scope.communityRepresentative,
-                "services": $scope.services
+                "servivces": $scope.services
                 //services to be included here
             }
         }).success(function(data) {
@@ -186,6 +221,24 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
             $scope.alluser = data;
         });
     }
+
+
+    $scope.postannouncement = function() {
+
+        $http({
+            method: 'post',
+            url: '/v1/announcements',
+            data: {
+                message: $scope.message,
+                date: Date.now()
+            }
+        }).success(function(data) {
+           console.log("Announcement completed");
+        });
+    }
+
+
+
 //******************************* Services Checkbox **************************************
     // $scope.services = ['Crime Alert','Weather Report','Parking','Health Benefits'];
     //
@@ -381,17 +434,20 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
                 type: 'column'
             },
             title: {
-                text: 'Browser market shares. January, 2015 to May, 2015'
+                text: 'Number of Users per Cluster'
             },
             // subtitle: {
             //     text: 'Click the columns to view versions. Source: <a href="http://netmarketshare.com">netmarketshare.com</a>.'
             // },
             xAxis: {
-                type: 'category'
+                type: 'category',
+                title: {
+                    text: 'Clusters'
+                }
             },
             yAxis: {
                 title: {
-                    text: 'Total percent market share'
+                    text: 'Number of Users'
                 }
             },
             legend: {
@@ -402,232 +458,110 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
                     borderWidth: 0,
                     dataLabels: {
                         enabled: true,
-                        format: '{point.y:.1f}%'
+                        format: '{point.y:f}'
                     }
                 }
             },
 
             tooltip: {
                 headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:f}<br/>'
             },
 
             series: [{
-                name: 'Brands',
+                name: 'Clusters',
                 colorByPoint: true,
                 data: [{
-                    name: 'Microsoft Internet Explorer',
-                    y: 56.33,
-                    drilldown: 'Microsoft Internet Explorer'
+                    name: '101 San Fernando',
+                    y: 20,
+                    drilldown: '101 San Fernando'
                 }, {
-                    name: 'Chrome',
-                    y: 24.03,
-                    drilldown: 'Chrome'
+                    name: 'Villa Torino',
+                    y: 25,
+                    drilldown: 'Villa Torino'
                 }, {
-                    name: 'Firefox',
-                    y: 10.38,
-                    drilldown: 'Firefox'
+                    name: 'Morrison Park',
+                    y: 12,
+                    drilldown: 'Morrison Park'
                 }, {
-                    name: 'Safari',
-                    y: 4.77,
-                    drilldown: 'Safari'
+                    name: 'Cahill Park',
+                    y: 27,
+                    drilldown: 'Cahill Park'
                 }, {
-                    name: 'Opera',
-                    y: 0.91,
-                    drilldown: 'Opera'
-                }, {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.2,
-                    drilldown: null
+                    name: '33 South',
+                    y: 14,
+                    drilldown: '33 South'
                 }]
             }],
-            drilldown: {
-                series: [{
-                    name: 'Microsoft Internet Explorer',
-                    id: 'Microsoft Internet Explorer',
-                    data: [
-                        [
-                            'v11.0',
-                            24.13
-                        ],
-                        [
-                            'v8.0',
-                            17.2
-                        ],
-                        [
-                            'v9.0',
-                            8.11
-                        ],
-                        [
-                            'v10.0',
-                            5.33
-                        ],
-                        [
-                            'v6.0',
-                            1.06
-                        ],
-                        [
-                            'v7.0',
-                            0.5
-                        ]
-                    ]
-                }, {
-                    name: 'Chrome',
-                    id: 'Chrome',
-                    data: [
-                        [
-                            'v40.0',
-                            5
-                        ],
-                        [
-                            'v41.0',
-                            4.32
-                        ],
-                        [
-                            'v42.0',
-                            3.68
-                        ],
-                        [
-                            'v39.0',
-                            2.96
-                        ],
-                        [
-                            'v36.0',
-                            2.53
-                        ],
-                        [
-                            'v43.0',
-                            1.45
-                        ],
-                        [
-                            'v31.0',
-                            1.24
-                        ],
-                        [
-                            'v35.0',
-                            0.85
-                        ],
-                        [
-                            'v38.0',
-                            0.6
-                        ],
-                        [
-                            'v32.0',
-                            0.55
-                        ],
-                        [
-                            'v37.0',
-                            0.38
-                        ],
-                        [
-                            'v33.0',
-                            0.19
-                        ],
-                        [
-                            'v34.0',
-                            0.14
-                        ],
-                        [
-                            'v30.0',
-                            0.14
-                        ]
-                    ]
-                }, {
-                    name: 'Firefox',
-                    id: 'Firefox',
-                    data: [
-                        [
-                            'v35',
-                            2.76
-                        ],
-                        [
-                            'v36',
-                            2.32
-                        ],
-                        [
-                            'v37',
-                            2.31
-                        ],
-                        [
-                            'v34',
-                            1.27
-                        ],
-                        [
-                            'v38',
-                            1.02
-                        ],
-                        [
-                            'v31',
-                            0.33
-                        ],
-                        [
-                            'v33',
-                            0.22
-                        ],
-                        [
-                            'v32',
-                            0.15
-                        ]
-                    ]
-                }, {
-                    name: 'Safari',
-                    id: 'Safari',
-                    data: [
-                        [
-                            'v8.0',
-                            2.56
-                        ],
-                        [
-                            'v7.1',
-                            0.77
-                        ],
-                        [
-                            'v5.1',
-                            0.42
-                        ],
-                        [
-                            'v5.0',
-                            0.3
-                        ],
-                        [
-                            'v6.1',
-                            0.29
-                        ],
-                        [
-                            'v7.0',
-                            0.26
-                        ],
-                        [
-                            'v6.2',
-                            0.17
-                        ]
-                    ]
-                }, {
-                    name: 'Opera',
-                    id: 'Opera',
-                    data: [
-                        [
-                            'v12.x',
-                            0.34
-                        ],
-                        [
-                            'v28',
-                            0.24
-                        ],
-                        [
-                            'v27',
-                            0.17
-                        ],
-                        [
-                            'v29',
-                            0.16
-                        ]
-                    ]
-                }]
-            }
+            drilldown: {}
         });
 
 //        })
+
+
+
+        Highcharts.chart('container2', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Number of Users per Service'
+            },
+            // subtitle: {
+            //     text: 'Click the columns to view versions. Source: <a href="http://netmarketshare.com">netmarketshare.com</a>.'
+            // },
+            xAxis: {
+                type: 'category',
+                title: {
+                    text: 'Services'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Number of Users'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:f}'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:f}<br/>'
+            },
+
+            series: [{
+                name: 'Services',
+                colorByPoint: true,
+                data: [{
+                    name: 'Crime Alert',
+                    y: 60,
+                    drilldown: 'Crime Alert'
+                }, {
+                    name: 'Event Notifications',
+                    y: 45,
+                    drilldown: 'Event Notifications'
+                }, {
+                    name: 'Parking',
+                    y: 16,
+                    drilldown: 'Parking'
+                }, {
+                    name: 'Weather Report',
+                    y: 46,
+                    drilldown: 'Weather Report'
+                }]
+            }],
+            drilldown: {}
+        });
     }
 
 
