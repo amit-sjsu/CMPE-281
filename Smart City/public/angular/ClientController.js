@@ -30,24 +30,67 @@ angular.module("myApp", [])
         // var communityDescription={"Villa"}
 
 
-        console.log(JSON.parse(sessionStorage.getItem("community"))._id);
+        // console.log(JSON.parse(sessionStorage.getItem("community"))._id);
+        //
+        // $http({
+        //     method: "GET",
+        //     url: '/v1/communities/'+JSON.parse(sessionStorage.getItem("community"))._id,
+        //     data: {}
+        // }).success(function (data) {
+        //
+        //     $scope.communityName=data.name;
+        //     // $scope.communityDescription=communityDescription.communityName;
+        //     $scope.Services = data.services;
+        //
+        // }).error(function (error) {
+        //
+        //     $scope.unexpected_error = false;
+        //     $scope.invalid_login = true;
+        //     // $window.alert("unexpected_error");
+        // });
 
-        $http({
-            method: "GET",
-            url: '/v1/communities/'+JSON.parse(sessionStorage.getItem("community"))._id,
-            data: {}
-        }).success(function (data) {
 
-            $scope.communityName=data.name;
-            // $scope.communityDescription=communityDescription.communityName;
-            $scope.Services = data.services;
 
-        }).error(function (error) {
 
-            $scope.unexpected_error = false;
-            $scope.invalid_login = true;
-            // $window.alert("unexpected_error");
-        });
+
+
+        //setting user dash board with user services details
+
+
+
+            $http({
+                method: "GET",
+                url: '/v1/users/'+useremailid,
+                data: {}
+            }).success(function (data) {
+
+                $scope.communityName=data[0].community.name;
+                $scope.Services = data[0].servivces;
+
+                // console.log(data);   console.log(data[0].community);
+                // sessionStorage.setItem("user",JSON.stringify(data[0]));
+                // sessionStorage.setItem("UserName",data[0].name);
+                // sessionStorage.setItem("community",JSON.stringify(data[0].community));
+                // window.location.assign("/login");
+
+            }).error(function (error) {
+
+                $scope.unexpected_error = false;
+                $scope.invalid_login = true;
+                $window.alert("Login Failed");
+                window.location.assign("/");
+
+            });
+
+
+
+
+
+
+
+
+        //end of dashboard services display
+
 
 
 
