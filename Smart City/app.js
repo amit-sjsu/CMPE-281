@@ -696,7 +696,10 @@ app.post('/v1/messages', jsonParser, function(req, res){
             console.log(er);
             res.status(500).send('{ "message" : "Unable to save message"}');
         }
-        else res.status(200).json(Message(req.body));
+        else {
+            console.log("Message sent succesfully");
+            res.status(200).json(Message(req.body));
+        }
     });
 });
 

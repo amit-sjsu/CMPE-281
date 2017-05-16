@@ -384,6 +384,37 @@ angular.module("myApp", [])
 
 
 
+        $scope.postMessages = function() {
+            console.log("Here");
+            console.log("Sending message to "+$scope.to_email);
+            $http({
+                method: 'POST',
+                url: '/v1/messages',
+                data: {
+                    message: $scope.message,
+                    to: $scope.to_email,
+                    from: useremailid,
+                    sentdate: Date.now()
+                }
+            }).success(function(data) {
+                console.log("Message sent successfully------");
+                swal({
+                    title: 'Send Message',
+                    type: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, send it!'
+                }).then(function () {
+                    swal(
+                        'Message Sent!',
+                        'Thank You.',
+                        'success'
+                    )
+                    // window.location.assign("/profilefeed");
+                })
+            })
+        }
 
 
 

@@ -142,11 +142,11 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
 
     $scope.services = [{
         "_id": "5917d621ef2f6a561acb66f1",
-        "title": "Disaster",
-        "description": "Baarish aai to bataunga",
+        "title": "Events",
+        "description": "Events",
         "status": true,
-        "url": "sdfsjfn",
-        "servicesprovided": "sdjflnsdf",
+        "url": "Events",
+        "servicesprovided": "Events",
         "__v": 0
     }, {
         "_id": "5917eb1845ed185ac111ead2",
@@ -167,11 +167,11 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
     },
         {
             "_id": "591a0fe239e441658e7f6209",
-            "title": "Weather reporting",
-            "description": "Weather reporting",
+            "title": "Parking",
+            "description": "Parking",
             "status": true,
-            "url": "Weather reporting",
-            "servicesprovided": "Weather reporting",
+            "url": "Parking",
+            "servicesprovided": "Parking",
             "__v": 0
         }];
 

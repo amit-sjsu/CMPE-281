@@ -432,16 +432,16 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" >Talk to you community people</h4>
                 </div>
-                <div class="modal-body row" style="margin-left: 10px;">
+                <div class="modal-body row" ng-model="to_email" style="margin-left: 10px;">
                     Select User :- <select>
-                        <option ng-repeat="user in users" value="user._id">{{user.name}}</option>
+                        <option ng-repeat="user in users"  value="{{user.email}}">{{user.name}}</option>
                     </select>
                 </div>
                 <div class="modal-body row" style="margin-left: 10px;">
-                    <textarea rows="4" cols="50" placeholder="Type your message here.."></textarea>
+                    <textarea rows="4" cols="50" placeholder="Type your message here.." ng-model="message"></textarea>
                 </div>
                 <div class=" modal-body row"  style="margin-left: 10px;">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Send</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="postMessages()">Send</button>
                 </div>
 
 
