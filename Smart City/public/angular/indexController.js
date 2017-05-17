@@ -32,6 +32,7 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
     $scope.login=function() {
 
         var email=$scope.user;
+        sessionStorage.setItem("email",email);
 
         if(email==="admin@gmail.com")
         {
@@ -45,8 +46,6 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
                 url: '/v1/users/'+email,
                 data: {}
             }).success(function (data) {
-
-
 
 
                 console.log(data);   console.log(data[0].community);
@@ -269,6 +268,18 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
     }
 
 
+
+
+    $scope.Logout =function () {
+
+        // sessionStorage.clear('community');
+        window.location.assign("/");
+
+    };
+
+
+
+
     $scope.postannouncement = function() {
 
         $http({
@@ -281,6 +292,7 @@ myApp.controller("AppCtrl", function($scope,$http,$window) {
         }).success(function(data) {
            console.log("Announcement completed");
         });
+
     }
 
 

@@ -60,7 +60,7 @@
     </div>
 
     <!--logo start-->
-    <a href="index.html" class="logo">Welcome <span class="lite">Admin</span></a>
+    <a href="#" class="logo">Welcome <span class="lite">Admin</span></a>
     <!--logo end-->
 
     <div class="nav search-row" id="top_menu">
@@ -177,7 +177,7 @@
             </li>
             <li>
               <a href="#">
-                <span class="photo"><img alt="avatar" src="./img/amitpandey.jpg"></span>
+                <span class="photo"><img alt="avatar" src="./img/avatar.png"></span>
                 <span class="subject">
                                     <span class="from">Moderator</span>
                                     <span class="time">1 min</span>
@@ -187,7 +187,7 @@
             </li>
             <li>
               <a href="#">
-                <span class="photo"><img alt="avatar" src="./img/amitpandey.jpg"></span>
+                <span class="photo"><img alt="avatar" src="./img/avatar.png"></span>
                 <span class="subject">
                                     <span class="from">Moderator</span>
                                     <span class="time">5 mins</span>
@@ -197,7 +197,7 @@
             </li>
             <li>
               <a href="#">
-                <span class="photo"><img alt="avatar" src="./img/amitpandey.jpg"></span>
+                <span class="photo"><img alt="avatar" src="./img/avatar.png"></span>
                 <span class="subject">
                                     <span class="from">Moderator</span>
                                     <span class="time">2 hrs</span>
@@ -207,7 +207,7 @@
             </li>
             <li>
               <a href="#">
-                <span class="photo"><img alt="avatar" src="./img/amitpandey.jpg"></span>
+                <span class="photo"><img alt="avatar" src="./img/avatar.png"></span>
                 <span class="subject">
                                     <span class="from">Moderator</span>
                                     <span class="time">1 day</span>
@@ -288,10 +288,10 @@
               <a href="#"><i class="icon_chat_alt"></i> Message to client</a>
             </li>
             <li>
-              <a href="login.ejs"><i class="icon_key_alt"></i> Settings</a>
+              <a href="#"><i class="icon_key_alt"></i> Settings</a>
             </li>
             <li>
-              <a href="documentation.html"><i class="icon_key_alt"></i> Log Out</a>
+              <a ng-click="Logout()"><i class="icon_key_alt"></i> Log Out</a>
             </li>
           </ul>
         </li>
@@ -308,7 +308,7 @@
       <!-- sidebar menu start-->
       <ul class="sidebar-menu">
         <li class="active">
-          <a class="" href="index.html">
+          <a class="" href="#">
             <i class="icon_house_alt"></i>
             <span>Dashboard</span>
           </a>
@@ -332,9 +332,9 @@
             <span class="menu-arrow arrow_carrot-right"></span>
           </a>
           <ul class="sub">
-            <li><a class="" href="form_component.html">Client Node</a></li>
+            <li><a class="" href="#">Client Node</a></li>
             <li><a class="" href="" ng-click="getService()" data-toggle="modal" data-target="#DeleteServiceModal">Service Node</a></li>
-            <li><a class="" href="form_validation.html">Smart Node</a></li>
+            <li><a class="" href="#">Smart Node</a></li>
           </ul>
         </li>
         <li class="sub-menu">
@@ -344,9 +344,9 @@
             <span class="menu-arrow arrow_carrot-right"></span>
           </a>
           <ul class="sub">
-            <li><a class="" href="form_component.html">Client Node</a></li>
-            <li><a class="" href="form_validation.html">Service Node</a></li>
-            <li><a class="" href="form_validation.html">Smart Node</a></li>
+            <li><a class="" href="#">Client Node</a></li>
+            <li><a class="" href="#">Service Node</a></li>
+            <li><a class="" href="#">Smart Node</a></li>
           </ul>
         </li>
         <li class="sub-menu">
@@ -359,7 +359,7 @@
             <li><a class="" ng-click="getService()" data-toggle="modal" data-target="#AddClusterModal">Add Cluster</a></li>
 
             <li><a class="" href="" ng-click="getCluster()" data-toggle="modal" data-target="#DeleteClusterModal">Delete Cluster</a></li>
-            <li><a class="" href="form_validation.html">Update Cluster</a></li>
+            <li><a class="" href="#">Update Cluster</a></li>
           </ul>
         </li>
         <li class="sub-menu">
@@ -368,11 +368,7 @@
               <span  data-toggle="modal" data-target="#BroadcastModal">Broadcast Message</span>
 
           </a>
-          <!--<ul class="sub">-->
-            <!--<li><a class="" href="form_component.html">Add Message Link</a></li>-->
-            <!--<li><a class="" href="form_validation.html">Delete Message Link</a></li>-->
-            <!--<li><a class="" href="form_validation.html">Update Message Link</a></li>-->
-          <!--</ul>-->
+
         </li>
 
 
